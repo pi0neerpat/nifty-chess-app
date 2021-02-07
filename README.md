@@ -1,24 +1,56 @@
-# Redwood
+<h1 align="center">Welcome to nifty-chess 👋</h1>
+<p>
+  <a href="#" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+  <!-- <a href="https://twitter.com/Superfluid\_HQ" target="_blank">
+    <img alt="Twitter: Superfluid_HQ" src="https://img.shields.io/twitter/follow/Superfluid_HQ.svg?style=social" />
+  </a> -->
+</p>
 
-> **WARNING:** RedwoodJS software has not reached a stable version 1.0 and should not be considered suitable for production use. In the "make it work; make it right; make it fast" paradigm, Redwood is in the later stages of the "make it work" phase.
+> A playful NFT game for collecting chess games. Made with <3 @ ETH Denver 2021
 
-## Getting Started
+<!-- ### 🏠 [Homepage](TODO) -->
+
+## Install
+
+```sh
+yarn install
+```
+
+copy `.env.template` to `.env` and add the required variables
+
+## Usage
+
+```sh
+yarn rw dev
+```
+
+## New to Redwood?
+
 - [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
 - [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
 - [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.
 
-### Setup
+## Author
 
-We use Yarn as our package manager. To get the dependencies installed, just do this in the root directory:
+👤 **Patrick Gallagher**
 
-```terminal
-yarn install
-```
+- Website: https://patrickgallagher.dev
 
-### Fire it up
+  - Twitter: [@pi0neerpat](https://twitter.com/pi0neerpat)
+  - GitHub: [@pi0neerpat](https://github.com/pi0neerpat)
 
-```terminal
-yarn redwood dev
-```
+  👤 **Joseph Schiarizzi**
 
-Your browser should open automatically to `http://localhost:8910` to see the web app. Lambda functions run on `http://localhost:8911` and are also proxied to `http://localhost:8910/.redwood/functions/*`. 
+- Website: https://ethhole.com
+  - Twitter: [@cupOJoseph](https://twitter.com/cupOJoseph)
+  - GitHub: [@jschiarizzi](https://github.com/jschiarizzi)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
