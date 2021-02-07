@@ -19,7 +19,7 @@ model AuthDetail {
 model User {
   address    String  @id
   authDetail AuthDetail
-  gamesMinted Game[]
+  gamesMinted Game[] @relation(name:"gamesMinted")
 }
 
 model Game {
@@ -32,5 +32,6 @@ model Game {
   movesHash String
   black String
   white String
-  minter User
+  minter User?  @relation(name:"gamesMinted", fields: [minterAddress], references: [address])
+  minterAddress String
 }

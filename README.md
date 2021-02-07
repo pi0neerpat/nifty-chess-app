@@ -12,6 +12,11 @@
 
 <!-- ### 🏠 [Homepage](TODO) -->
 
+## Tech stack
+
+- `@redwoodjs` for the React and Prisma database tooling
+- `@oneclickdapp/ethereum-auth` for wallet authentication [docs](https://github.com/oneclickdapp/ethereum-auth/blob/master/README.md)
+
 ## Install
 
 ```sh

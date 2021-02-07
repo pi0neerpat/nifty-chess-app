@@ -3,6 +3,7 @@ import EthereumAuthClient from '@oneclickdapp/ethereum-auth'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { FetchConfigProvider, useFetchConfig } from '@redwoodjs/web'
 import ReactDOM from 'react-dom'
+import DefaultLayout from 'src/layouts/DefaultLayout'
 
 import { FatalErrorBoundary } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
@@ -50,13 +51,15 @@ const ApolloInjector = ({ children }) => {
 ReactDOM.render(
   <FatalErrorBoundary page={FatalErrorPage}>
     <FetchConfigProvider>
-    <ApolloInjector>
-    <AuthProvider client={ethereum} type="ethereum">
-      <RedwoodApolloProvider>
-        <Routes />
-      </RedwoodApolloProvider>
-    </AuthProvider>
-    </ApolloInjector>
+      <ApolloInjector>
+        <AuthProvider client={ethereum} type="ethereum">
+          <RedwoodApolloProvider>
+            <DefaultLayout>
+              <Routes />
+            </DefaultLayout>
+          </RedwoodApolloProvider>
+        </AuthProvider>
+      </ApolloInjector>
     </FetchConfigProvider>
   </FatalErrorBoundary>,
   document.getElementById('redwood-app')
