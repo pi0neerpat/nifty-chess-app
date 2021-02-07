@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@redwoodjs/api": "^0.24.0"
+    "@redwoodjs/api": "^0.24.0",
+    "eth-sig-util": "^3.0.1",
+    "ethereumjs-util": "^7.0.8",
+    "jsonwebtoken": "^8.5.1"
   }
 }
