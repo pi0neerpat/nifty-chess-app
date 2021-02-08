@@ -97,4 +97,8 @@ ReactDOM.render(
 {React.cloneElement(children, { useAuth })}
 ```
 
-In our `LoginPage`
+Perfect, we are ready to spin up our app.
+
+```
+
+```
