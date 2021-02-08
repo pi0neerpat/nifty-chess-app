@@ -4,10 +4,10 @@ export const schema = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     playedAt: DateTime!
-    mintedAt: DateTime
+    mintedAt: String
     minter: User
     minterAddress: String
-    tokenId Integer?
+    tokenId Int?
     externalUrl String
     location: String!
     event: String

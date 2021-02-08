@@ -23,13 +23,6 @@ export const createGame = ({ input }) => {
   // })
 }
 
-export const createGameFromRaw = ({ input }) => {
-  console.log(input)
-  // return db.game.create({
-  //   data: input,
-  // })
-}
-
 export const updateGame = ({ id, input }) => {
   return db.game.update({
     data: input,

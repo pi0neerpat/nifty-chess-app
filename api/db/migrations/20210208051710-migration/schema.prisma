@@ -2,7 +2,7 @@ datasource DS {
   // optionally set multiple providers
   // example: provider = ["sqlite", "postgresql"]
   provider = ["sqlite", "postgresql"]
-  url      = env("DATABASE_URL" )
+  url = "***"
 }
 
 generator client {
@@ -27,7 +27,7 @@ model Game {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   playedAt DateTime
-  mintedAt String?
+  mintedAt DateTime
   minter User?  @relation(name: "gamesMinted", fields: [minterAddress], references: [id])
   minterAddress String?
   tokenId Int?
