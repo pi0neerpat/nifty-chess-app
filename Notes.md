@@ -100,5 +100,7 @@ ReactDOM.render(
 Perfect, we are ready to spin up our app.
 
 ```
-
+yarn rw db save
+yarn rw db up
+yarn rw dev
 ```
