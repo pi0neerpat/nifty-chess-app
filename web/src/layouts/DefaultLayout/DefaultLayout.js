@@ -48,22 +48,24 @@ const DefaultLayout = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="relative bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-            <div className="flex justify-start lg:w-0 lg:flex-1">
-              <Link to="/">
-                <img className="h-12" src={banner} />
-              </Link>
+      <body className="relative">
+        <header className="relative bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+              <div className="flex justify-start lg:w-0 lg:flex-1">
+                <Link to="/">
+                  <img className="h-12" src={banner} />
+                </Link>
+              </div>
+              {loginButton}
             </div>
-            {loginButton}
           </div>
+        </header>
+        <div className="flex-grow">
+          {React.cloneElement(children, { useAuth })}
         </div>
-      </header>
-      <div className="flex-grow">
-        {React.cloneElement(children, { useAuth })}
-      </div>
-      <Footer className="mt-8 relative bg-gray-100" />
+        <Footer className="mt-8 relative bg-gray-100" />
+      </body>
     </div>
   )
 }
