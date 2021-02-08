@@ -25,7 +25,5 @@ export const schema = gql`
 
   type Mutation {
     createGame(input: CreateGameInput!): Game!
-    updateGame(id: String!, input: UpdateGameInput!): Game!
-    deleteGame(id: String!): Game!
   }
 `

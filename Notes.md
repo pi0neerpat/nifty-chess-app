@@ -104,3 +104,11 @@ yarn rw db save
 yarn rw db up
 yarn rw dev
 ```
+
+Now lets copy some frontend code from an example repo. I found [GatsbyJS Tailwind Starter](https://github.com/app-generator/gatsbyjs-starter-tailwindplay) which looks cool.
+
+Now before we get too deep, lets set up our hosting, so out teammates can test out the app as we push up our changes. I'm using the [vercel hosting guide](https://redwoodjs.com/tutorial/deployment.html#vercel-alternative-deploy-target) with Heroku for the Postgres database.
+
+```bash
+yarn rw setup deploy vercel
+```

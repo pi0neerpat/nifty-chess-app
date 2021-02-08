@@ -13,14 +13,14 @@ const Routes = () => {
   return (
     <Router>
       <Route path="/" page={HomePage} name="home" />
-      <Private unauthenticated="login">
-        <Route path="/games/new" page={NewGamePage} name="newGame" />
-      </Private>
+      <Route path="/games/new" page={NewGamePage} name="newGame" />
       <Route path="/games/{id}/edit" page={EditGamePage} name="editGame" />
       <Route path="/games/{id}" page={GamePage} name="game" />
       <Route path="/games" page={GamesPage} name="games" />
       <Route path="/login" page={LoginPage} name="login" />
-      <Route path="/users/{id}/edit" page={EditUserPage} name="editUser" />
+      <Private unauthenticated="login">
+        <Route path="/users/{id}/edit" page={EditUserPage} name="editUser" />
+      </Private>
       <Route path="/users/{id}" page={UserPage} name="user" />
       <Route path="/users" page={UsersPage} name="users" />
       <Route notfound page={NotFoundPage} />
