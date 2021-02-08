@@ -1,17 +1,20 @@
 export const schema = gql`
   type Game {
     id: String!
-    publicId: String!
     createdAt: DateTime!
     updatedAt: DateTime!
     playedAt: DateTime!
-    mintedAt: DateTime!
+    mintedAt: DateTime
+    minter: User
+    minterAddress: String
+    tokenId Integer?
+    externalUrl String
+    location: String!
+    event: String
     moves: String!
-    movesHash: String!
     black: String!
     white: String!
-    minter: User
-    userAddress: String
+    whiteWins: Boolean!
   }
 
   type Query {
@@ -20,7 +23,7 @@ export const schema = gql`
   }
 
   input CreateGameInput {
-    publicId: String!
+    externalUrl: String!
   }
 
   type Mutation {

@@ -23,20 +23,20 @@ const GameForm = (props) => {
         />
 
         <Label
-          name="publicId"
+          name="externalUrl"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Game ID (lichess.org or Chess.com)
+          Game URL (lichess.org or Chess.com)
         </Label>
         <TextField
-          placeholder="eg. Wt6wqlVj"
-          name="publicId"
+          placeholder="eg. https://lichess.org/Wt6wqlVj/black"
+          name="externalUrl"
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
-        <FieldError name="publicId" className="rw-field-error" />
+        <FieldError name="externalUrl" className="rw-field-error" />
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save

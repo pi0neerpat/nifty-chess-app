@@ -11,9 +11,23 @@ export const game = ({ id }) => {
 }
 
 export const createGame = ({ input }) => {
-  return db.game.create({
-    data: input,
-  })
+  // Validate URL is lichess or chess.com
+
+  // Regex ID out from the URL
+
+  // Fetch game using API
+
+  console.log(input)
+  // return db.game.create({
+  //   data: input,
+  // })
+}
+
+export const createGameFromRaw = ({ input }) => {
+  console.log(input)
+  // return db.game.create({
+  //   data: input,
+  // })
 }
 
 export const updateGame = ({ id, input }) => {

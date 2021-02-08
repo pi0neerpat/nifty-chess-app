@@ -1,3 +1,4 @@
+const { id } = require('@ethersproject/hash')
 /* eslint-disable no-console */
 const { PrismaClient } = require('@prisma/client')
 const dotenv = require('dotenv')
@@ -5,30 +6,62 @@ const dotenv = require('dotenv')
 dotenv.config()
 const db = new PrismaClient()
 
-const moves = `1.c4 g6 2.d4 Bg7 3.Nc3 d6 4.e4 Nf6 5.f3 e5 6.dxe5 dxe5 7.Qxd8+ Kxd8 8.Bg5 c6
-9.Nge2 Nd7 10.Rd1 Kc7 11.Nc1 Nc5 12.Be3 Nfd7 13.b4 Ne6 14.Nb3 Bf8 15.c5 a5
-16.Nxa5 Nexc5 17.a3 Ne6 18.Kf2 Be7 19.Rc1 Bg5 20.Bxg5 Nxg5 21.Bc4 Nb6 22.h4 Ne6
-23.Nb5+ Kb8 24.Nd6 Nxc4 25.Naxc4 f6 26.Rc3 Ra6 27.Rhc1 Rd8 28.Nxc8 Kxc8 29.a4 Kd7
-30.Rd1+ Ke7 31.Rxd8 Kxd8 32.a5 Ke7 33.Nb6 c5 34.Nd5+ Kf7 35.bxc5 Rc6 36.Ke3 f5
-37.g3 Nxc5 38.Nb4 f4+ 39.gxf4 exf4+ 40.Ke2 Rc7 41.Nd3 Ne6 42.Rxc7+ Nxc7 43.Nxf4 Kf6
-44.Nd3 Ne6 45.Ke3 Ke7 46.Nf4 Nc5 47.Nd5+ Kf7 48.Nb6 Ke6 49.Nc4 h6 50.f4 Nb3
-51.h5 gxh5 52.f5+ Ke7 53.e5 h4 54.Kf4 h5 55.f6+ Ke6 56.Nd6 Nxa5 57.f7 Ke7
-58.e6 Nc6 59.Nf5+ Kf8 60.Nxh4 Ne7 61.Ke5 Kg7 62.Kd6 Kf8 63.Kc5 Kg7 64.Kc4 Kf8
-65.Kd4 Kg7 66.Kc5 Kf8 67.Kd6 b6 68.Ke5 Kg7 69.Kd4 Nc6+ 70.Kd5 Ne7+ 71.Ke5 b5
-72.Kd6 Kf8 73.Kc5 Kg7 74.Kxb5 Nd5 75.Kc6`
+const rawGames = [
+  {
+    moves:
+      '1.Nf3 f5 2.c4 Nf6 3.g3 g6 4.d4 Bg7 5.Bg2 d6 6.O-O O-O 7.d5 c5 8.Nc3 Na6 9.Qb3 Nc7 10.Bd2 b6 11.Qc2 Bb7 12.Rad1 e6 13.dxe6 Nxe6 14.Ng5 Nd4 15.Qd3 Bxg2 16.Kxg2 Ng4 17.b3 Ne5 18.Qb1 h6 19.Nh3 Qd7 20.f3 b5 21.cxb5 Nxb5 22.Nf4 a6 23.h4 Rae8 24.Nxb5 axb5 25.Qc2 b4 26.Bc1 Ra8 27.h5 g5 28.Ng6 Nxg6 29.hxg6 Qe6 30.f4 g4 31.Rd3 Rfe8 32.Kf2 Qxg6 33.e3 Qe6 34.Rfd1 Qe4 35.Qe2 Red8 36.Rxd6 Rxd6 37.Rxd6 Qh1 38.Qc4+ Kh8 39.Qd5 Rxa2+ 40.Bd2 Qxd5 41.Rxd5 c4 42.bxc4 b3 43.Rd8+ Kh7 44.Rd7 b2 45.Rb7 Ra7 46.Rxa7 b1=Q 47.Ke2 Kg6 48.Ra6+ Bf6 49.Rd6 Qe4 50.c5 Qf3+ 51.Kd3 Qf1+ 52.Kc2 Qc4+ 53.Kd1 Qxc5 54.Rd3 Qc6 55.Be1 Be7 56.Rb3 Qd5+ 57.Kc2 Qc4+ 58.Bc3 Bc5 59.Rb8 Bxe3',
+    event: '7th WCCC',
+    playedAt: '1992.??.??',
+    location: 'Madrid',
+    whitePlayer: 'Woodpusher',
+    blackPlayer: 'Fritz 2',
+    result: 0,
+  },
+]
+
+const getNumberOrNull = (input) => {
+  if (typeof Number(input) === 'number') return Number(input)
+  return null
+}
 
 async function main() {
-  // Seed data is database data that needs to exist for your app to run.
-  // Ideally this file should be idempotent: running it multiple times
-  // will result in the same database state (usually by checking for the
-  // existence of a record before trying to create it). For example:
-  //
-  //   const existing = await db.user.findMany({ where: { email: 'admin@email.com' }})
-  //   if (!existing.length) {
-  //     await db.user.create({ data: { name: 'Admin', email: 'admin@email.com' }})
-  //   }
-
-  console.info('No data to seed. See api/db/seeds.js for info.')
+  await Promise.all(
+    rawGames.map(
+      async ({
+        moves,
+        event,
+        playedAt: playedAtRaw,
+        location,
+        whitePlayer,
+        blackPlayer,
+        result,
+      }) => {
+        const id = id(moves)
+        const exists = await db.game.findUnique({ where: { id } })
+        if (exists) {
+          const [year, month, day] = playedAtRaw?.split('.')
+          const playedAt = new Date(
+            getNumberOrNull(year),
+            getNumberOrNull(month) - 1,
+            getNumberOrNull(day)
+          )
+          await db.user.createGameFromRaw({
+            data: {
+              id,
+              playedAt,
+              location,
+              event,
+              moves,
+              black,
+              white,
+              whiteWins: Boolean(result),
+            },
+          })
+        }
+        console.info('No data to seed. See api/db/seeds.js for info.')
+      }
+    )
+  )
 }
 
 main()

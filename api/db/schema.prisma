@@ -1,8 +1,8 @@
 datasource DS {
   // optionally set multiple providers
   // example: provider = ["sqlite", "postgresql"]
-  provider = "sqlite"
-  url      = env("DATABASE_URL", "postgresql")
+  provider = ["sqlite", "postgresql"]
+  url      = env("DATABASE_URL" )
 }
 
 generator client {
@@ -17,21 +17,25 @@ model AuthDetail {
 }
 
 model User {
-  address    String  @id
+  id    String  @id
   authDetail AuthDetail
-  gamesMinted Game[] @relation(name:"gamesMinted")
+  games Game[] @relation(name: "gamesMinted" )
 }
 
 model Game {
-  movesHash String   @id
+  id String   @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   playedAt DateTime
-  mintedAt DateTime
+  mintedAt? DateTime
+  minter User?  @relation(name: "gamesMinted", fields: [minterAddress], references: [id])
+  minterAddress String?
+  tokenId Integer?
+  externalUrl String?
+  location String
+  event String?
   moves String
   black String
   white String
-  whiteWins Bool
-  minter User?  @relation(name:"gamesMinted", fields: [minterAddress], references: [address])
-  minterAddress String
+  whiteWins Boolean
 }
