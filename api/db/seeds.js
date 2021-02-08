@@ -42,19 +42,23 @@ async function main() {
         const id = sha3(moves)
         const exists = await db.game.findUnique({ where: { id } })
         if (!exists) {
-          await db.game.create({
-            data: {
-              id,
-              playedAt: parseDate(playedAtRaw),
-              mintedAt: '',
-              location,
-              event,
-              moves,
-              black,
-              white,
-              whiteWins: Boolean(result),
-            },
-          })
+          try {
+            await db.game.create({
+              data: {
+                id,
+                playedAt: parseDate(playedAtRaw),
+                location,
+                event,
+                moves,
+                black,
+                white,
+                whiteWins: Boolean(result),
+              },
+            })
+          } catch (e) {
+            console.log('error making game ')
+            console.log(e)
+          }
         } else {
           console.info('No data to seed. See api/db/seeds.js for info.')
         }

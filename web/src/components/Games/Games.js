@@ -67,10 +67,8 @@ const GamesList = ({ games }) => {
             <th>Played at</th>
             <th>Minted at</th>
             <th>Moves</th>
-            <th>Moves hash</th>
             <th>Black</th>
             <th>White</th>
-            <th>User address</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -83,10 +81,8 @@ const GamesList = ({ games }) => {
               <td>{timeTag(game.playedAt)}</td>
               <td>{timeTag(game.mintedAt)}</td>
               <td>{truncate(game.moves)}</td>
-              <td>{truncate(game.movesHash)}</td>
               <td>{truncate(game.black)}</td>
               <td>{truncate(game.white)}</td>
-              <td>{truncate(game.userAddress)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

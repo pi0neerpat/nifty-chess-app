@@ -7,8 +7,8 @@ export const schema = gql`
     mintedAt: String
     minter: User
     minterAddress: String
-    tokenId Int?
-    externalUrl String
+    tokenId: Int
+    externalUrl: String
     location: String!
     event: String
     moves: String!

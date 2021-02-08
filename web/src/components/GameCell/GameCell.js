@@ -8,11 +8,15 @@ export const QUERY = gql`
       updatedAt
       playedAt
       mintedAt
+      minterAddress
+      tokenId
+      externalUrl
+      location
+      event
       moves
-      movesHash
       black
       white
-      userAddress
+      whiteWins
     }
   }
 `

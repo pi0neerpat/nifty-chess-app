@@ -18,9 +18,9 @@ export const createGame = ({ input }) => {
   // Fetch game using API
 
   console.log(input)
-  // return db.game.create({
-  //   data: input,
-  // })
+  return db.game.create({
+    data: input,
+  })
 }
 
 export const updateGame = ({ id, input }) => {

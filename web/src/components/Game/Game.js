@@ -80,10 +80,7 @@ const Game = ({ game }) => {
               <th>Moves</th>
               <td>{game.moves}</td>
             </tr>
-            <tr>
-              <th>Moves hash</th>
-              <td>{game.movesHash}</td>
-            </tr>
+
             <tr>
               <th>Black</th>
               <td>{game.black}</td>
@@ -91,10 +88,6 @@ const Game = ({ game }) => {
             <tr>
               <th>White</th>
               <td>{game.white}</td>
-            </tr>
-            <tr>
-              <th>User address</th>
-              <td>{game.userAddress}</td>
             </tr>
           </tbody>
         </table>

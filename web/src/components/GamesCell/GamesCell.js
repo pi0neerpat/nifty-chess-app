@@ -11,10 +11,8 @@ export const QUERY = gql`
       playedAt
       mintedAt
       moves
-      movesHash
       black
       white
-      userAddress
     }
   }
 `

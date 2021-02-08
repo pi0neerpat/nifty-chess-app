@@ -27,7 +27,7 @@ model Game {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   playedAt DateTime
-  mintedAt DateTime
+  mintedAt String?
   minter User?  @relation(name: "gamesMinted", fields: [minterAddress], references: [id])
   minterAddress String?
   tokenId Int?
