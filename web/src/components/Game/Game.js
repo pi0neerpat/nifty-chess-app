@@ -1,7 +1,7 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes, navigate } from '@redwoodjs/router'
-
 import { useAuth } from '@redwoodjs/auth'
+
 import { Web3Provider } from '@ethersproject/providers'
 import { Contract } from '@ethersproject/contracts'
 
@@ -43,33 +43,71 @@ const Game = ({ game }) => {
 
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
+  const [gifSrc, setGifSrc] = React.useState(null)
+
+  React.useEffect(() => {
+    fetchGif()
+  }, [])
+
+  const fetchGif = async () => {
+    const res = await fetch('https://pgn2gif.glitch.me/thing', {
+      method: 'POST',
+      body: JSON.stringify({ pgn: game.moves, movesHash: game.id }),
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const blob = await res.blob()
+    setGifSrc(URL.createObjectURL(blob))
+  }
+
+  const [
+    mintNFT,
+    { loading: loadingMutation, error: errorMutation },
+  ] = useMutation(MINT_GAME_MUTATION, {
+    onCompleted: () => {
+      setLoading(false)
+      // navigate(routes.game({game.id}))
+      addMessage('Minting complete!', { classes: 'rw-flash-success' })
+    },
+  })
 
   const onMintClick = async (id) => {
     setLoading(true)
+
     const walletProvider = new Web3Provider(window.ethereum)
     const signer = walletProvider.getSigner()
     const network = await walletProvider.getNetwork()
+
     const nftContract = new Contract(
       CONTRACTS['nft'][network.name],
       CONTRACTS['nft'].abi,
       signer
     )
 
-    const tx = await contract.mint(id)
-    // Do mutation to store transaction hash
+    const tx = await nftContract.mint(id)
+    const receipt = await tx.wait(0)
 
-    setLoading(false)
-    addMessage('Flow created.', { classes: 'rw-flash-success' })
+    createUser({ variables: { input } })
   }
 
   return (
     <>
       <div className="flex">
-        <div className="flex-auto">
-          <img src="" />
-          GIF of game
+        <div className="flex-auto justify-items-center">
+          <img src={gifSrc} />
+          <nav className="rw-button-group mt-4">
+            <a
+              href="#"
+              className="rw-button rw-button-blue"
+              onClick={() => onMintClick(game.id)}
+            >
+              Mint
+            </a>
+          </nav>
         </div>
-        <div className="rw-segment flex-auto">
+        <div className="rw-segment flex-auto h-auto">
           <header className="rw-segment-header">
             <h2 className="rw-heading rw-heading-secondary">Details</h2>
           </header>
@@ -111,15 +149,6 @@ const Game = ({ game }) => {
           </table>
         </div>
       </div>
-      <nav className="rw-button-group mt-4">
-        <a
-          href="#"
-          className="rw-button rw-button-blue"
-          onClick={() => onMintClick(game.id)}
-        >
-          Mint
-        </a>
-      </nav>
     </>
   )
 }
