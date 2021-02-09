@@ -97,56 +97,80 @@ const Game = ({ game }) => {
       <div className="flex">
         <div className="flex-auto justify-items-center">
           <img src={gifSrc} />
+        </div>
+        <div className="flex-auto ">
+          <div className="rw-segment">
+            <header className="rw-segment-header">
+              <h2 className="rw-heading rw-heading-secondary">Details</h2>
+            </header>
+            <table className="rw-table">
+              <tbody>
+                <tr>
+                  <th>Date</th>
+                  <td>{timeTag(game.playedAt)}</td>
+                </tr>
+                <tr>
+                  <th>Location</th>
+                  <td>{game.location}</td>
+                </tr>
+                <tr>
+                  <th>
+                    <svg height="20" width="20" className="ml-6">
+                      <circle
+                        cx="10"
+                        cy="10"
+                        r="8"
+                        stroke="black"
+                        stroke-width="2"
+                        fill="black"
+                      />
+                    </svg>
+                  </th>
+                  <td>
+                    {game.black} {!game.whiteWins && '(winner)'}
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <svg height="20" width="20" className="ml-6">
+                      <circle
+                        cx="10"
+                        cy="10"
+                        r="8"
+                        stroke="black"
+                        stroke-width="2"
+                        fill="white"
+                      />
+                    </svg>
+                  </th>
+                  <td>
+                    {game.white} {game.whiteWins && '(winner)'}
+                  </td>
+                </tr>
+                {game.mintedAt && (
+                  <tr>
+                    <th>Minted</th>
+                    <td>{timeTag(game.mintedAt)}</td>
+                  </tr>
+                )}
+                {game.mintedAt && (
+                  <tr>
+                    <th>Minter</th>
+                    <td>{game.minterAddress}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
           <nav className="rw-button-group mt-4">
             <a
               href="#"
               className="rw-button rw-button-blue"
               onClick={() => onMintClick(game.id)}
             >
-              Mint
+              Save as NFT
             </a>
           </nav>
-        </div>
-        <div className="rw-segment flex-auto h-auto">
-          <header className="rw-segment-header">
-            <h2 className="rw-heading rw-heading-secondary">Details</h2>
-          </header>
-          <table className="rw-table">
-            <tbody>
-              <tr>
-                <th>Date</th>
-                <td>{timeTag(game.playedAt)}</td>
-              </tr>
-              <tr>
-                <th>Location</th>
-                <td>{game.location}</td>
-              </tr>
-              <tr>
-                <th>Black</th>
-                <td>{game.black}</td>
-              </tr>
-              <tr>
-                <th>White</th>
-                <td>{game.white}</td>
-              </tr>
-              <tr>
-                <th>Winner</th>
-                <td>{game.whiteWins ? 'White' : 'Black'}</td>
-              </tr>
-              {game.mintedAt && (
-                <tr>
-                  <th>Minted</th>
-                  <td>{timeTag(game.mintedAt)}</td>
-                </tr>
-              )}
-              {game.mintedAt && (
-                <tr>
-                  <th>Minter</th>
-                  <td>{game.minterAddress}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
         </div>
       </div>
     </>
