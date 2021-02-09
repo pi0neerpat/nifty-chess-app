@@ -1,11 +1,18 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes, navigate } from '@redwoodjs/router'
 
+import { useAuth } from '@redwoodjs/auth'
+import { Web3Provider } from '@ethersproject/providers'
+import { Contract } from '@ethersproject/contracts'
+
+import CONTRACTS from 'src/utils/contracts'
+
 import { QUERY } from 'src/components/GamesCell'
 
-const DELETE_GAME_MUTATION = gql`
-  mutation DeleteGameMutation($id: String!) {
-    deleteGame(id: $id) {
+const MINT_GAME_MUTATION = gql`
+  mutation MintGameMutation($id: String!) {
+    mintGame(id: $id) {
+      transactionHash
       id
     }
   }
@@ -33,78 +40,84 @@ const checkboxInputTag = (checked) => {
 
 const Game = ({ game }) => {
   const { addMessage } = useFlash()
-  const [deleteGame] = useMutation(DELETE_GAME_MUTATION, {
-    onCompleted: () => {
-      navigate(routes.games())
-      addMessage('Game deleted.', { classes: 'rw-flash-success' })
-    },
-  })
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete game ' + id + '?')) {
-      deleteGame({ variables: { id } })
-    }
+  const [error, setError] = React.useState(null)
+  const [loading, setLoading] = React.useState(false)
+
+  const onMintClick = async (id) => {
+    setLoading(true)
+    const walletProvider = new Web3Provider(window.ethereum)
+    const signer = walletProvider.getSigner()
+    const network = await walletProvider.getNetwork()
+    const nftContract = new Contract(
+      CONTRACTS['nft'][network.name],
+      CONTRACTS['nft'].abi,
+      signer
+    )
+
+    const tx = await contract.mint(id)
+    // Do mutation to store transaction hash
+
+    setLoading(false)
+    addMessage('Flow created.', { classes: 'rw-flash-success' })
   }
 
   return (
     <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            Game {game.id} Detail
-          </h2>
-        </header>
-        <table className="rw-table">
-          <tbody>
-            <tr>
-              <th>Id</th>
-              <td>{game.id}</td>
-            </tr>
-            <tr>
-              <th>Created at</th>
-              <td>{timeTag(game.createdAt)}</td>
-            </tr>
-            <tr>
-              <th>Updated at</th>
-              <td>{timeTag(game.updatedAt)}</td>
-            </tr>
-            <tr>
-              <th>Played at</th>
-              <td>{timeTag(game.playedAt)}</td>
-            </tr>
-            <tr>
-              <th>Minted at</th>
-              <td>{timeTag(game.mintedAt)}</td>
-            </tr>
-            <tr>
-              <th>Moves</th>
-              <td>{game.moves}</td>
-            </tr>
-
-            <tr>
-              <th>Black</th>
-              <td>{game.black}</td>
-            </tr>
-            <tr>
-              <th>White</th>
-              <td>{game.white}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="flex">
+        <div className="flex-auto">
+          <img src="" />
+          GIF of game
+        </div>
+        <div className="rw-segment flex-auto">
+          <header className="rw-segment-header">
+            <h2 className="rw-heading rw-heading-secondary">Details</h2>
+          </header>
+          <table className="rw-table">
+            <tbody>
+              <tr>
+                <th>Date</th>
+                <td>{timeTag(game.playedAt)}</td>
+              </tr>
+              <tr>
+                <th>Location</th>
+                <td>{game.location}</td>
+              </tr>
+              <tr>
+                <th>Black</th>
+                <td>{game.black}</td>
+              </tr>
+              <tr>
+                <th>White</th>
+                <td>{game.white}</td>
+              </tr>
+              <tr>
+                <th>Winner</th>
+                <td>{game.whiteWins ? 'White' : 'Black'}</td>
+              </tr>
+              {game.mintedAt && (
+                <tr>
+                  <th>Minted</th>
+                  <td>{timeTag(game.mintedAt)}</td>
+                </tr>
+              )}
+              {game.mintedAt && (
+                <tr>
+                  <th>Minter</th>
+                  <td>{game.minterAddress}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editGame({ id: game.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
+      <nav className="rw-button-group mt-4">
         <a
           href="#"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(game.id)}
+          className="rw-button rw-button-blue"
+          onClick={() => onMintClick(game.id)}
         >
-          Delete
+          Mint
         </a>
       </nav>
     </>
