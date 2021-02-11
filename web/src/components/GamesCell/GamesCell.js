@@ -4,7 +4,7 @@ import Games from 'src/components/Games'
 
 export const QUERY = gql`
   query GAMES {
-    games {
+    games(filter: { first: 100 }) {
       id
       createdAt
       updatedAt

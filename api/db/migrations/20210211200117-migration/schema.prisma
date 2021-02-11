@@ -1,0 +1,42 @@
+datasource DS {
+  // optionally set multiple providers
+  // example: provider = ["sqlite", "postgresql"]
+  provider = ["sqlite", "postgresql"]
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model AuthDetail {
+  id        String   @id @default(uuid())
+  nonce     String
+  timestamp DateTime @default(now())
+}
+
+model User {
+  id    String  @id
+  authDetail AuthDetail
+  games Game[] @relation(name: "gamesMinted" )
+}
+
+model Game {
+  id String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  playedAt DateTime
+  mintedAt String?
+  minter User?  @relation(name: "gamesMinted", fields: [minterAddress], references: [id])
+  minterAddress String?
+  tokenId Int?
+  externalUrl String?
+  location String
+  event String?
+  moves String
+  moveCount Int
+  black String
+  white String
+  winner String
+}
