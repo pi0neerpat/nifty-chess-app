@@ -8,7 +8,8 @@ const fs = require('fs-extra')
 const path = require('path')
 
 // Change campaign here
-const directoryPath = path.join(__dirname, '../../../chessGames')
+const grandmasterDirectoryPath = path.join(__dirname, '../../../chessGames')
+const celebrityDirectoryPath = path.join(__dirname, './celebrityGames')
 
 dotenv.config()
 const db = new PrismaClient()
@@ -39,67 +40,76 @@ const parseDate = (rawDate) => {
   return new Date(year, month || 0, day || 0)
 }
 
+const seed = async (rawGames) => {
+  await Promise.all(
+    rawGames.map(
+      async (
+        { moves, event, playedAt: playedAtRaw, location, white, black, winner },
+        index
+      ) => {
+        const id = sha3(moves)
+        const exists = await db.game.findOne({ where: { id } })
+        if (!exists) {
+          try {
+            await db.game.create({
+              data: {
+                id,
+                playedAt: parseDate(playedAtRaw),
+                location,
+                event,
+                moves,
+                black,
+                white,
+                winner,
+                moveCount: countMoves(moves),
+              },
+            })
+            if (index === files.length - 1) {
+              console.log('Last file: ', index)
+            } else if (index % 100 === 0) console.log('Games seeded: ', index)
+          } catch (e) {
+            console.log('error making game ')
+            console.log(e)
+            console.log(playedAtRaw)
+          }
+        } else {
+          // console.info('No data to seed. See api/db/seeds.js for info.')
+        }
+      }
+    )
+  )
+}
+
 async function main() {
   let rawGames = []
-  fs.readdir(directoryPath, async (err, files) => {
+  // fs.readdir(grandmasterDirectoryPath, async (err, files) => {
+  //   if (err) return console.log(err)
+  //   console.log('Loading grand master game files...')
+  //   await files.forEach((fileName, index) => {
+  //     if (index === files.length - 1) {
+  //       console.log('Last file: ', index)
+  //     } else if (index % 1000 === 0) console.log('Games seeded: ', index)
+  //     const game = require(path.join(grandmasterDirectoryPath, fileName))
+  //     rawGames.push(game)
+  //   })
+  //   console.log(rawGames.length)
+  //   console.log('Example game:')
+  //   console.log(rawGames[0])
+  //   console.log('Files loaded successfully! Time to seed...')
+  //   console.log('Seed grandmaster games is complete!')
+  // })
+  fs.readdir(celebrityDirectoryPath, async (err, files) => {
     if (err) return console.log(err)
-    console.log('Loading all game files...')
+    console.log('Loading celebrity game files...')
     await files.forEach((fileName, index) => {
       if (index === files.length - 1) {
         console.log('Last file: ', index)
-      } else if (index % 1000 === 0) console.log('Games seeded: ', index)
-      const game = require(path.join(directoryPath, fileName))
+      } else console.log('Games seeded: ', index)
+      const game = require(path.join(grandmasterDirectoryPath, fileName))
       rawGames.push(game)
     })
-    console.log(rawGames.length)
-    console.log('Example game:')
-    console.log(rawGames[0])
     console.log('Files loaded successfully! Time to seed...')
-    await Promise.all(
-      rawGames.map(
-        async (
-          {
-            moves,
-            event,
-            playedAt: playedAtRaw,
-            location,
-            white,
-            black,
-            winner,
-          },
-          index
-        ) => {
-          const id = sha3(moves)
-          const exists = await db.game.findOne({ where: { id } })
-          if (!exists) {
-            try {
-              await db.game.create({
-                data: {
-                  id,
-                  playedAt: parseDate(playedAtRaw),
-                  location,
-                  event,
-                  moves,
-                  black,
-                  white,
-                  winner,
-                  moveCount: countMoves(moves),
-                },
-              })
-              if (index === files.length - 1) {
-                console.log('Last file: ', index)
-              } else if (index % 100 === 0) console.log('Games seeded: ', index)
-            } catch (e) {
-              console.log('error making game ')
-              console.log(e)
-              console.log(playedAtRaw)
-            }
-          } else {
-            // console.info('No data to seed. See api/db/seeds.js for info.')
-          }
-        }
-      )
-    )
+    await seed(rawGames)
     console.log('Database seeded successfully!')
   })
 }

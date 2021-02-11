@@ -1,10 +1,10 @@
 import GamesLayout from 'src/layouts/GamesLayout'
 import GamesCell from 'src/components/GamesCell'
 
-const GamesPage = () => {
+const GamesPage = ({ page }) => {
   return (
     <GamesLayout>
-      <GamesCell />
+      <GamesCell page={page} />
     </GamesLayout>
   )
 }

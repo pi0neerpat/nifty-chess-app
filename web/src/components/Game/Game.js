@@ -18,25 +18,12 @@ const MINT_GAME_MUTATION = gql`
   }
 `
 
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
-
 const timeTag = (datetime) => {
   return (
     <time dateTime={datetime} title={datetime}>
       {new Date(datetime).toUTCString()}
     </time>
   )
-}
-
-const countMoves = (moves) => {
-  console.log(moves)
-  return 2
 }
 
 const checkboxInputTag = (checked) => {
@@ -154,7 +141,7 @@ const Game = ({ game }) => {
                 </tr>
                 <tr>
                   <th>Moves</th>
-                  <td>{countMoves(game.moves)}</td>
+                  <td>{game.moveCount}</td>
                 </tr>
                 {game.externalUrl && (
                   <tr>

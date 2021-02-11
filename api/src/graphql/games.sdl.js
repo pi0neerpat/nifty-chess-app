@@ -21,6 +21,12 @@ export const schema = gql`
   type Query {
     games: [Game!]!
     game(id: String!): Game
+    gamePage(page: Int): GamePage
+  }
+
+  type GamePage {
+    games: [Game!]!
+    count: Int!
   }
 
   input CreateGameInput {
