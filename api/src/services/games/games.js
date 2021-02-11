@@ -1,10 +1,11 @@
 import { db } from 'src/lib/db'
 import fetch from 'node-fetch'
+import { id as sha3 } from '@ethersproject/hash'
 
 const LI_CHESS_API = 'https://lichess.org/game/export/'
 const LI_CHESS_PARAMS = '?clocks=false'
 
-const textRaw = `[Event "Rated Bullet game"]
+const text1 = `[Event "Rated Bullet game"]
 [Site "https://lichess.org/3RVEhTDV"]
 [Date "2021.02.06"]
 [White "jschiarizzi"]
@@ -26,6 +27,7 @@ const textRaw = `[Event "Rated Bullet game"]
 `
 
 const parseDate = (rawDate) => {
+  if (!rawDate) return ''
   let [year, month, day] = rawDate.split('.')
   if (year.includes('?')) year = 0
   month = month.includes('?') ? 0 : month - 1
@@ -45,17 +47,24 @@ export const game = ({ id }) => {
 
 export const createGame = async ({ input: { externalUrl } }) => {
   let black
-  let white = 'white'
+  let white
   let playedAtRaw
-  let winner
+  let winner = 'white'
   let location = 'Lichess.org'
   let eventName
   let moves
 
   if (externalUrl.includes('lichess.org')) {
-    const gameId = externalUrl.split('lichess.org/')[1].slice(0, 8)
-    const data = await fetch(`${LI_CHESS_API}${gameId}${LI_CHESS_PARAMS}`)
-    const text = await data.text()
+    // https://lichess.org/api#section/Introduction
+    let text
+    try {
+      const gameId = externalUrl.split('lichess.org/')[1].slice(0, 8)
+      const res = await fetch(`${LI_CHESS_API}${gameId}${LI_CHESS_PARAMS}`)
+      if (res.status === 404) throw new Error(`Game ${gameId} not found`)
+      text = await res.text()
+    } catch (e) {
+      throw new Error(`Couldn't get game from Lichess.org. ${e}`)
+    }
     text.split(/\n/).map((line) => {
       if (line.includes('[Black ')) black = line.split(`"`)[1]
       if (line.includes('[White ')) white = line.split(`"`)[1]
@@ -63,19 +72,23 @@ export const createGame = async ({ input: { externalUrl } }) => {
       if (line.includes('[Date ')) playedAtRaw = line.split(`"`)[1]
       let winnerRaw
       if (line.includes('[Result ')) winnerRaw = line.split(`"`)[1]
+      if (line.includes('[Result ')) console.log(line)
       if (winnerRaw === '0-1') winner = 'black'
       else if (winnerRaw === '1/2-1/2') winner = 'draw'
-      if (line.match(/1./)) moves = line.trim()
+      if (line.match(/1./)) console.log(line)
+      if (line.match(/1./)) moves = line.split(/[0-21/2]+-/)[0].trim()
     })
-  }
-  if (externalUrl.includes('chess.com')) {
+  } else if (externalUrl.includes('chess.com')) {
     // https://www.chess.com/news/view/published-data-api#pubapi-endpoint-games
+    // https://github.com/andyruwruw/chess-web-api
     location = 'Chess.com'
+    throw Error('Chess.com is not available yet!')
+  } else {
+    throw Error('URL is not valid')
   }
 
   // const playedAt =
-
-  console.log({
+  const input = {
     black,
     white,
     playedAt: parseDate(playedAtRaw),
@@ -83,10 +96,13 @@ export const createGame = async ({ input: { externalUrl } }) => {
     location,
     event: eventName,
     moves,
+    id: sha3(moves),
+    externalUrl,
+  }
+  // console.log(input)
+  return db.game.create({
+    data: input,
   })
-  // return db.game.create({
-  //   data: input,
-  // })
 }
 
 export const updateGame = ({ id, input }) => {

@@ -15,8 +15,8 @@ const CREATE_GAME_MUTATION = gql`
 const NewGame = () => {
   const { addMessage } = useFlash()
   const [createGame, { loading, error }] = useMutation(CREATE_GAME_MUTATION, {
-    onCompleted: () => {
-      navigate(routes.games())
+    onCompleted: ({ createGame: { id } }) => {
+      navigate(routes.game({ id }))
       addMessage('Game created.', { classes: 'rw-flash-success' })
     },
   })
