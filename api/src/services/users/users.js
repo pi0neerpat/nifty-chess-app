@@ -5,7 +5,7 @@ export const users = () => {
 }
 
 export const user = ({ id }) => {
-  return db.user.findUnique({
+  return db.user.findOne({
     where: { id },
   })
 }
@@ -31,7 +31,7 @@ export const deleteUser = ({ id }) => {
 
 export const User = {
   authDetail: (_obj, { root }) =>
-    db.user.findUnique({ where: { id: root.id } }).authDetail(),
+    db.user.findOne({ where: { id: root.id } }).authDetail(),
   gamesMinted: (_obj, { root }) =>
-    db.user.findUnique({ where: { id: root.id } }).gamesMinted(),
+    db.user.findOne({ where: { id: root.id } }).gamesMinted(),
 }

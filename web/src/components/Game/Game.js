@@ -34,6 +34,11 @@ const timeTag = (datetime) => {
   )
 }
 
+const countMoves = (moves) => {
+  console.log(moves)
+  return 2
+}
+
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
@@ -121,7 +126,7 @@ const Game = ({ game }) => {
                         cy="10"
                         r="8"
                         stroke="black"
-                        stroke-width="2"
+                        strokeWidth="2"
                         fill="black"
                       />
                     </svg>
@@ -136,7 +141,7 @@ const Game = ({ game }) => {
                         cy="10"
                         r="8"
                         stroke="black"
-                        stroke-width="2"
+                        strokeWidth="2"
                         fill="white"
                       />
                     </svg>
@@ -147,6 +152,20 @@ const Game = ({ game }) => {
                   <th>Winner</th>
                   <td>{game.winner}</td>
                 </tr>
+                <tr>
+                  <th>Moves</th>
+                  <td>{countMoves(game.moves)}</td>
+                </tr>
+                {game.externalUrl && (
+                  <tr>
+                    <th>Visit</th>
+                    <td>
+                      <a href={game.externalUrl} target="_blank">
+                        Lichess.org
+                      </a>
+                    </td>
+                  </tr>
+                )}
                 {game.mintedAt && (
                   <tr>
                     <th>Minted</th>

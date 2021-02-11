@@ -8,5 +8,10 @@
     "eth-sig-util": "^3.0.1",
     "ethereumjs-util": "^7.0.8",
     "jsonwebtoken": "^8.5.1"
+  },
+  "resolutions": {
+    "@prisma/client": "2.11.0",
+    "@prisma/cli": "2.11.0",
+    "@prisma/sdk": "2.11.0"
   }
 }

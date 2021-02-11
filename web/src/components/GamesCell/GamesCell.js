@@ -13,6 +13,7 @@ export const QUERY = gql`
       moves
       black
       white
+      externalUrl
     }
   }
 `

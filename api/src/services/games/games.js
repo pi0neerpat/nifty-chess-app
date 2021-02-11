@@ -26,6 +26,10 @@ const text1 = `[Event "Rated Bullet game"]
 1. e4 e6 2. Nf3 d5 3. d4 c5 4. exd5 exd5 5. Bb5+ Nc6 6. Bxc6+ bxc6 7. c3 Nf6 8. Bf4 Qe7+ 9. Qe2 cxd4 10. cxd4 Qxe2+ 11. Kxe2 Ba6+ 12. Kd2 Bb4+ 13. Nc3 Ne4+ 14. Kc2 Nxf2 15. Rhf1 Ne4 16. Rfe1 O-O 17. Re3 Nxc3 18. bxc3 Be7 19. Ne5 Bf6 20. Nxc6 Rac8 21. Nb4 Bxd4 22. Rd3 Bxd3+ 23. Kxd3 Bxc3 24. Nxd5 Bxa1 25. Ne7+ Kh8 26. Nxc8 Rxc8 27. Bd6 Rc3+ 28. Kd2 Rc6 29. Bb4 Bf6 30. a3 Rb6 31. Ke3 a5 32. Kf3 axb4 33. axb4 Rxb4 34. g3 Rb2 35. Kg4 Rxh2 36. Kf4 Rg2 37. Kf5 Rxg3 38. Ke4 h6 39. Kd5 h5 40. Kc6 h4 41. Kd7 h3 42. Ke8 h2 43. Kf8 h1=Q 44. Ke8 Rd3 45. Kxf7 Rd8 46. Kg6 Qf1 47. Kf7 Rd5 48. Kg6 Re5 49. Kf7 Qg2 50. Kf8 Qg6 1/2-1/2
 `
 
+const countMoves = (moves) => {
+  return Math.round(moves.trim().split(' ').length / 2)
+}
+
 const parseDate = (rawDate) => {
   if (!rawDate) return ''
   let [year, month, day] = rawDate.split('.')
@@ -40,7 +44,7 @@ export const games = () => {
 }
 
 export const game = ({ id }) => {
-  return db.game.findUnique({
+  return db.game.findOne({
     where: { id },
   })
 }
@@ -72,10 +76,8 @@ export const createGame = async ({ input: { externalUrl } }) => {
       if (line.includes('[Date ')) playedAtRaw = line.split(`"`)[1]
       let winnerRaw
       if (line.includes('[Result ')) winnerRaw = line.split(`"`)[1]
-      if (line.includes('[Result ')) console.log(line)
       if (winnerRaw === '0-1') winner = 'black'
       else if (winnerRaw === '1/2-1/2') winner = 'draw'
-      if (line.match(/1./)) console.log(line)
       if (line.match(/1./)) moves = line.split(/[0-21/2]+-/)[0].trim()
     })
   } else if (externalUrl.includes('chess.com')) {
@@ -97,6 +99,7 @@ export const createGame = async ({ input: { externalUrl } }) => {
     event: eventName,
     moves,
     id: sha3(moves),
+    moveCount: countMoves(moves),
     externalUrl,
   }
   // console.log(input)
@@ -120,5 +123,5 @@ export const deleteGame = ({ id }) => {
 
 export const Game = {
   minter: (_obj, { root }) =>
-    db.game.findUnique({ where: { id: root.id } }).minter(),
+    db.game.findOne({ where: { id: root.id } }).minter(),
 }

@@ -6,6 +6,10 @@ const dotenv = require('dotenv')
 dotenv.config()
 const db = new PrismaClient()
 
+const countMoves = (moves) => {
+  return Math.round(moves.trim().split(' ').length / 2)
+}
+
 const rawGames = [
   {
     moves:
@@ -40,7 +44,7 @@ async function main() {
         winner,
       }) => {
         const id = sha3(moves)
-        const exists = await db.game.findUnique({ where: { id } })
+        const exists = await db.game.findOne({ where: { id } })
         if (!exists) {
           try {
             await db.game.create({
@@ -53,6 +57,7 @@ async function main() {
                 black,
                 white,
                 winner,
+                moveCount: countMoves(moves),
               },
             })
           } catch (e) {

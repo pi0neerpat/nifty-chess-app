@@ -12,6 +12,7 @@ export const schema = gql`
     location: String!
     event: String
     moves: String!
+    moveCount: Int!
     black: String!
     white: String!
     winner: String!
