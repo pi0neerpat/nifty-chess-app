@@ -126,9 +126,7 @@ const Game = ({ game }) => {
                       />
                     </svg>
                   </th>
-                  <td>
-                    {game.black} {!game.whiteWins && '(winner)'}
-                  </td>
+                  <td>{game.black}</td>
                 </tr>
                 <tr>
                   <th>
@@ -143,9 +141,11 @@ const Game = ({ game }) => {
                       />
                     </svg>
                   </th>
-                  <td>
-                    {game.white} {game.whiteWins && '(winner)'}
-                  </td>
+                  <td>{game.white}</td>
+                </tr>
+                <tr>
+                  <th>Winner</th>
+                  <td>{game.winner}</td>
                 </tr>
                 {game.mintedAt && (
                   <tr>

@@ -16,7 +16,7 @@ export const QUERY = gql`
       moves
       black
       white
-      whiteWins
+      winner
     }
   }
 `

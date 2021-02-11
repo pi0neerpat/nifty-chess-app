@@ -37,5 +37,5 @@ model Game {
   moves String
   black String
   white String
-  whiteWins Boolean
+  winner String
 }

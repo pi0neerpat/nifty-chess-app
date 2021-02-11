@@ -375,8 +375,8 @@
     {
       "tag": "CreateField",
       "model": "Game",
-      "field": "whiteWins",
-      "type": "Boolean",
+      "field": "winner",
+      "type": "String",
       "arity": "Required"
     }
   ]

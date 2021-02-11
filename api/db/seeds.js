@@ -13,9 +13,9 @@ const rawGames = [
     event: '7th WCCC',
     playedAt: '1992.1.??',
     location: 'Madrid',
-    whitePlayer: 'Woodpusher',
-    blackPlayer: 'Fritz 2',
-    result: 0,
+    white: 'Woodpusher',
+    black: 'Fritz 2',
+    winner: 'black',
   },
 ]
 
@@ -35,9 +35,9 @@ async function main() {
         event,
         playedAt: playedAtRaw,
         location,
-        whitePlayer: white,
-        blackPlayer: black,
-        result,
+        white,
+        black,
+        winner,
       }) => {
         const id = sha3(moves)
         const exists = await db.game.findUnique({ where: { id } })
@@ -52,7 +52,7 @@ async function main() {
                 moves,
                 black,
                 white,
-                whiteWins: Boolean(result),
+                winner,
               },
             })
           } catch (e) {

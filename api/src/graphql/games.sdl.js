@@ -14,7 +14,7 @@ export const schema = gql`
     moves: String!
     black: String!
     white: String!
-    whiteWins: Boolean!
+    winner: String!
   }
 
   type Query {
