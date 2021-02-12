@@ -65,7 +65,7 @@ const DefaultLayout = ({ children }) => {
           {React.cloneElement(children, { useAuth })}
         </div>
       </div>
-      <Footer />
+      <Footer className="relative"/>
     </div>
   )
 }

@@ -18,6 +18,30 @@
 - `@oneclickdapp/ethereum-auth` for wallet authentication [docs](https://github.com/oneclickdapp/ethereum-auth/blob/master/README.md)
 - `node-pgn2gif` library adapted from `pgn2gif`. Every pgn is broken into JSON, and there is one pgn for each game, rather than for each tournament. We also hash the pgn to generate the NFT seed (which is used to generate the color) https://github.com/jschiarizzi/node-pgn2gif
 
+## Contracts
+
+### xDAI
+
+NiftyChess Contract (proxy): 0xAe7ca55Ce4511C848ac4F9C0F26abD9ecaaee2c6 [Blockscout explorer](https://blockscout.com/poa/xdai/address/0xAe7ca55Ce4511C848ac4F9C0F26abD9ecaaee2c6/transactions)
+
+Current Logic contract: 0x51fD8E034A8aE34C499F9EE869886f303FadF228
+
+Bridge Mediator: 0x9d68A3490E0b0CBD9265A21b5bD307f6Ea7e769e [Blockscout explorer](https://blockscout.com/poa/xdai/address/0x9d68A3490E0b0CBD9265A21b5bD307f6Ea7e769e/transactions)
+
+### Mainnet
+
+These contracts will be deployed soon.
+
+### Code + Developer stuff
+
+Our smart contracts are adapted from the Nifty Ink contracts.
+
+Contract source code: http://remix.ethereum.org/?gist=b44c2c66212f701dc1ddab277cf7e8e7&call=fileManager//open//browser/niftyChess.sol
+
+One Click Dapp: https://oneclickdapp.com??
+
+ABI for interacting with the contract: https://gist.github.com/jschiarizzi/0f12f4f7bc02bbfe3373f30d470e38a6
+
 ## Install
 
 ```sh

@@ -1,10 +1,12 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useAuth } from '@redwoodjs/auth'
-
 import { Web3Provider } from '@ethersproject/providers'
 import { Contract } from '@ethersproject/contracts'
 
+import toast from 'react-hot-toast'
+
+import { mint } from 'src/utils/niftyChess'
 import CONTRACTS from 'src/utils/contracts'
 
 import { QUERY } from 'src/components/GamesCell'
@@ -69,21 +71,14 @@ const Game = ({ game }) => {
 
   const onMintClick = async (id) => {
     setLoading(true)
-
-    const walletProvider = new Web3Provider(window.ethereum)
-    const signer = walletProvider.getSigner()
-    const network = await walletProvider.getNetwork()
-
-    const nftContract = new Contract(
-      CONTRACTS['nft'][network.name],
-      CONTRACTS['nft'].abi,
-      signer
-    )
-
-    const tx = await nftContract.mint(id)
+    const { tx, error } = await mint({ id })
+    if (error) {
+      console.log(error.message)
+      toast.error(error.message)
+      return
+    }
     const receipt = await tx.wait(0)
-
-    createUser({ variables: { input } })
+    // createUser({ variables: { input } })
   }
 
   return (
