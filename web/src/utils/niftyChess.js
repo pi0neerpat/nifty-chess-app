@@ -10,9 +10,10 @@ import { unlockBrowser } from './connect'
 export const mint = async ({ id }) => {
   try {
     toast('Connecting to your wallet...')
-    const { walletProvider, walletAddress } = await unlockBrowser({
+    const { walletProvider, walletAddress, network } = await unlockBrowser({
       debug: true,
     })
+    if (network.name !== 'xDAI') throw Error('Please switch to xDAI network')
     const niftyChess = new Contract(
       CONTRACTS.niftyChess.xdai,
       CONTRACTS.niftyChess.abi,

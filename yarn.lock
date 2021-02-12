@@ -2797,6 +2797,13 @@
     telejson "^3.2.0"
     util-deprecate "^1.0.2"
 
+"@superfluid-finance/js-sdk@^0.3.5":
+  version "0.3.5"
+  resolved "https://npm.pkg.github.com/download/@superfluid-finance/js-sdk/0.3.5/cf41947c8735f35660d0194cd152ff7f55e6e8ef9cdfc5953e576adcf9fde376#67a592f241448ab8a9c00174f532933e27310f90"
+  integrity sha512-MMv0SIuEfDsBVgox98E1h/UoHMZfmx240p6rqR1favqLNH3jwKvXFGHAc5Xw/hcT36KkFXMk7xqGmRPlfB1dNg==
+  dependencies:
+    "@ethersproject/hash" "^5.0.11"
+
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
   resolved "https://registry.npmjs.org/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-4.2.0.tgz#dadcb6218503532d6884b210e7f3c502caaa44b1"

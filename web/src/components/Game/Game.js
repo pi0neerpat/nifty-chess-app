@@ -156,7 +156,7 @@ const Game = ({ game }) => {
                   className="w-full rw-button rw-button-blue"
                   onClick={() => onMintClick(game.id)}
                 >
-                  Mint NFT
+                  Mint NFT (xDAI)
                 </button>
               </div>
             )}
