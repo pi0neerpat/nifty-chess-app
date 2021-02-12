@@ -77,8 +77,11 @@ const Game = ({ game }) => {
       toast.error(error.message)
       return
     }
-    const receipt = await tx.wait(0)
-    // createUser({ variables: { input } })
+    toast.promise(tx.wait(0), {
+      loading: 'Minting...',
+      success: <b>Minted!</b>,
+      error: <b>Something went wrong.</b>,
+    })
   }
 
   return (

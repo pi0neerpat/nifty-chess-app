@@ -17,7 +17,7 @@ export const mint = async ({ id }) => {
       walletProvider.getSigner()
     )
     const tx = await niftyChess.mintBoard(walletAddress, '', id, {
-      value: parseUnits(3, 18).toString(),
+      value: parseUnits('3', 18).toString(),
     })
     return { tx }
   } catch (err) {

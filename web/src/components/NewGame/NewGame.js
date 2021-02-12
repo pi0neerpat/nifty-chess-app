@@ -2,6 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import GameForm from 'src/components/GameForm'
 
+import toast from 'react-hot-toast'
 import { QUERY } from 'src/components/GamesCell'
 
 const CREATE_GAME_MUTATION = gql`
@@ -16,7 +17,7 @@ const NewGame = () => {
   const [createGame, { loading, error }] = useMutation(CREATE_GAME_MUTATION, {
     onCompleted: ({ createGame: { id } }) => {
       navigate(routes.game({ id }))
-      // show toast here
+      toast.success('Game created!')
     },
   })
 
