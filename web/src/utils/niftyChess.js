@@ -1,5 +1,6 @@
 import { parseUnits, formatUnits } from '@ethersproject/units'
 import { Contract } from '@ethersproject/contracts'
+import toast from 'react-hot-toast'
 
 import CONTRACTS from './contracts'
 
@@ -8,6 +9,7 @@ import { unlockBrowser } from './connect'
 
 export const mint = async ({ id }) => {
   try {
+    toast('Connecting to your wallet...')
     const { walletProvider, walletAddress } = await unlockBrowser({
       debug: true,
     })

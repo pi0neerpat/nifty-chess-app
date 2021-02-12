@@ -28,7 +28,7 @@ const NewGame = () => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">New Game</h2>
+        <h2 className="rw-heading rw-heading-secondary">Create a GIF</h2>
       </header>
       <div className="rw-segment-main">
         <GameForm onSave={onSave} loading={loading} error={error} />

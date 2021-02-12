@@ -121,7 +121,7 @@ const Game = ({ game }) => {
               </div>
             </h1>
             <div className="mt-5">
-              <h2 className=" text-xl leading-tight font-semibold tracking-tight text-blue-600 sm:text-2xl">
+              <h2 className=" text-xl leading-tight font-semibold tracking-tight text-blue sm:text-2xl">
                 {timeTag(game.playedAt)}
               </h2>
             </div>
@@ -147,13 +147,13 @@ const Game = ({ game }) => {
 
             {!game.mintedAt && (
               <div className="mt-8">
-                <a
-                  href="#"
-                  className="rw-button rw-button-blue"
+                <button
+                  disabled={loading}
+                  className="w-full rw-button rw-button-blue"
                   onClick={() => onMintClick(game.id)}
                 >
                   Mint NFT
-                </a>
+                </button>
               </div>
             )}
           </div>

@@ -23,7 +23,7 @@ const GameCard = ({ game }) => {
   }, [])
 
   const fetchGif = async () => {
-    const res = await fetch('https://pgn2gif.glitch.me/thing', {
+    const res = await fetch('https://pgn2gif.glitch.me/tiny', {
       method: 'POST',
       body: JSON.stringify({ pgn: game.moves, movesHash: game.id }),
       // mode: 'cors',
@@ -41,7 +41,7 @@ const GameCard = ({ game }) => {
         <div className="group-hover:opacity-75 transition duration-150 ease-in-out">
           <img src={gifSrc} />
         </div>
-        <div className="p-4 sm:p-5">
+        <div className="text-left p-4 sm:p-5">
           <h1 className="sm:text-lg text-gray-900 font-semibold">
             <div className="flex">
               <svg height="20" width="20" className="mr-2 mt-1">

@@ -21,8 +21,7 @@ const games = [
 [EndTime "02:58:10"]
 [Link "https://www.chess.com/live/game/6486284822"]
 
-1. e4 e5 2. d4 exd4 3. c3 b6 4. Bc4 Bb7 5. Nf3 Bxe4 6. Qxd4 Qe7 7. O-O Bxf3 8.
-gxf3 Nc6 9. Qd5 O-O-O 10. f4 Nf6 11. Qg2 g6 12. b4 Bg7 13. b5 Na5 14. Qa8# 1-0`,
+1. e4 e5 2. d4 exd4 3. c3 b6 4. Bc4 Bb7 5. Nf3 Bxe4 6. Qxd4 Qe7 7. O-O Bxf3 8. gxf3 Nc6 9. Qd5 O-O-O 10. f4 Nf6 11. Qg2 g6 12. b4 Bg7 13. b5 Na5 14. Qa8# 1-0`,
   `[Event "Live Chess"]
 [Site "Chess.com"]
 [Date "2021.02.08"]
@@ -45,8 +44,7 @@ gxf3 Nc6 9. Qd5 O-O-O 10. f4 Nf6 11. Qg2 g6 12. b4 Bg7 13. b5 Na5 14. Qa8# 1-0`,
 [EndTime "02:52:13"]
 [Link "https://www.chess.com/live/game/6486250106"]
 
-1. e4 e5 2. Nf3 d6 3. d4 exd4 4. Nxd4 Nc6 5. Nc3 Nxd4 6. Qxd4 f6 7. Bc4 Qd7 8.
-Be3 b6 9. Bxg8 Rxg8 10. Qd5 Rh8 11. Qxa8 Be7 12. Nd5 Kf7 13. Qxa7 1-0`,
+1. e4 e5 2. Nf3 d6 3. d4 exd4 4. Nxd4 Nc6 5. Nc3 Nxd4 6. Qxd4 f6 7. Bc4 Qd7 8. Be3 b6 9. Bxg8 Rxg8 10. Qd5 Rh8 11. Qxa8 Be7 12. Nd5 Kf7 13. Qxa7 1-0`,
   `[Event "Live Chess"]
 [Site "Chess.com"]
 [Date "2021.02.08"]
@@ -69,10 +67,6 @@ Be3 b6 9. Bxg8 Rxg8 10. Qd5 Rh8 11. Qxa8 Be7 12. Nd5 Kf7 13. Qxa7 1-0`,
 [EndTime "02:55:58"]
 [Link "https://www.chess.com/live/game/6486264945"]
 
-1. d4 e5 2. dxe5 Bc5 3. e3 d6 4. Bd3 dxe5 5. Qe2 Nf6 6. Bc4 Qe7 7. b3 c6 8. Bb2
-b5 9. Bd3 e4 10. Bxb5 cxb5 11. Qxb5+ Bd7 12. Qb7 Bc6 13. Qxe7+ Kxe7 14. Bxf6+
-gxf6 15. Ne2 Nd7 16. Nbc3 Ne5 17. O-O h5 18. Rad1 h4 19. Nf4 Rag8 20. Nh3 Bb4
-21. Ne2 Bd7 22. Nef4 Bg4 23. Nd5+ Ke6 24. Nxb4 Bxh3 25. g3 Nf3+ 26. Kh1 hxg3 27.
-fxg3 Bxf1 28. Rxf1 Rxh2# 0-1`,
+1. d4 e5 2. dxe5 Bc5 3. e3 d6 4. Bd3 dxe5 5. Qe2 Nf6 6. Bc4 Qe7 7. b3 c6 8. Bb2 b5 9. Bd3 e4 10. Bxb5 cxb5 11. Qxb5+ Bd7 12. Qb7 Bc6 13. Qxe7+ Kxe7 14. Bxf6+ gxf6 15. Ne2 Nd7 16. Nbc3 Ne5 17. O-O h5 18. Rad1 h4 19. Nf4 Rag8 20. Nh3 Bb4 21. Ne2 Bd7 22. Nef4 Bg4 23. Nd5+ Ke6 24. Nxb4 Bxh3 25. g3 Nf3+ 26. Kh1 hxg3 27. fxg3 Bxf1 28. Rxf1 Rxh2# 0-1`,
 ]
 module.exports = games
