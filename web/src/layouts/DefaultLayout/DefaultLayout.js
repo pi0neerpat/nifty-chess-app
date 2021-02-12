@@ -60,10 +60,12 @@ const DefaultLayout = ({ children }) => {
           </div>
         </div>
       </header>
-      <div className="flex-grow">
-        {React.cloneElement(children, { useAuth })}
+      <div className="flex-grow relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          {React.cloneElement(children, { useAuth })}
+        </div>
       </div>
-      <Footer className="mt-8 relative bg-gray-100" />
+      <Footer />
     </div>
   )
 }

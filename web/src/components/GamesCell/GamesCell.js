@@ -45,7 +45,7 @@ export const Empty = () => {
 export const Success = ({ gamePage, page, perPage }) => {
   page = page ? parseInt(page, 10) : 1
   return (
-    <div className="container">
+    <div className="container text-center">
       <div className="flex flex-wrap -mx-3 lg:-mx-6">
         {gamePage.games.map((game) => (
           <div key={game.id} className="w-full sm:w-1/2 lg:w-1/3 p-3 md:p-6">
@@ -53,7 +53,13 @@ export const Success = ({ gamePage, page, perPage }) => {
           </div>
         ))}
       </div>
-      <Pagination count={gamePage.count} perPage={GAMES_PER_PAGE} page={page} />
+      <div>
+        <Pagination
+          count={gamePage.count}
+          perPage={GAMES_PER_PAGE}
+          page={page}
+        />
+      </div>
     </div>
   )
 }

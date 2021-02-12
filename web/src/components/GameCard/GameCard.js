@@ -1,6 +1,8 @@
 import { useMutation, useFlash } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 
+const LOADING_GIF_SRC = '/skeleton.png'
+
 const timeTag = (datetime) => {
   return (
     <time dateTime={datetime} title={datetime}>
@@ -14,26 +16,23 @@ const GameCard = ({ game }) => {
 
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
-  const [gifSrc, setGifSrc] = React.useState(null)
+  const [gifSrc, setGifSrc] = React.useState(LOADING_GIF_SRC)
 
   React.useEffect(() => {
     fetchGif()
   }, [])
 
   const fetchGif = async () => {
-    // const res = await fetch('https://pgn2gif.glitch.me/thing', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ pgn: game.moves, movesHash: game.id }),
-    //   // mode: 'cors',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    // const blob = await res.blob()
-    // setGifSrc(URL.createObjectURL(blob))
-    setGifSrc(
-      'https://gatsby-contentful-portfolio.netlify.app/static/b4a22f4943d8109a73c845e7521def69/c1c70/spain2.jpg'
-    )
+    const res = await fetch('https://pgn2gif.glitch.me/thing', {
+      method: 'POST',
+      body: JSON.stringify({ pgn: game.moves, movesHash: game.id }),
+      // mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const blob = await res.blob()
+    setGifSrc(URL.createObjectURL(blob))
   }
 
   return (

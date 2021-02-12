@@ -9,8 +9,8 @@ import CONTRACTS from 'src/utils/contracts'
 
 import { QUERY } from 'src/components/GamesCell'
 
-const LOADING_GIF_SRC =
-  'https://gatsby-contentful-portfolio.netlify.app/static/b4a22f4943d8109a73c845e7521def69/c1c70/spain2.jpg'
+const LOADING_GIF_SRC = '/skeleton.png'
+
 const MINT_GAME_MUTATION = gql`
   mutation MintGameMutation($id: String!) {
     mintGame(id: $id) {

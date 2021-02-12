@@ -4,11 +4,13 @@ const Pagination = ({ count, page, perPage }) => {
   const items = []
   const addButton = ({ text, page }) =>
     items.push(
-      <li key={page} className="inline-block mx-1 text-indigo-400">
-        <Link to={routes.games({ page })} className="py-1 px-3">
-          {text}
-        </Link>
-      </li>
+      <Link
+        key={page}
+        to={routes.games({ page })}
+        className="text-center inline-block m-2 w-14 py-1 px-1 border-4 border-purple rounded-full"
+      >
+        {text}
+      </Link>
     )
 
   const totalPages = Math.ceil(count / perPage)
@@ -16,18 +18,14 @@ const Pagination = ({ count, page, perPage }) => {
   if (page > 10) addButton({ text: '-10', page: page - 10 })
   addButton({ text: '<', page: page - 1 })
   items.push(
-    <li key={page} className="inline-block mx-1 py-1 px-3">
+    <div key={page} className="inline-block mx-1 py-1 px-3 ">
       {page}
-    </li>
+    </div>
   )
   addButton({ text: '>', page: page + 1 })
   if (page < count - 10) addButton({ text: '+10', page: page + 10 })
 
-  return (
-    <>
-      <ul>{items}</ul>
-    </>
-  )
+  return <div className="text-lg text-gray-900 font-semibold">{items}</div>
 }
 
 export default Pagination

@@ -1,13 +1,10 @@
 import { routes, navigate, Link } from '@redwoodjs/router'
 import logo from './logo.png'
 const Footer = () => (
-  <footer className="bg-white">
+  <footer className="bg-grey">
     <div className="container mx-auto  px-8">
       <div className="w-full flex flex-col md:flex-row py-6">
         <div className="flex-1 mb-6">
-          <Link to="home">
-            <img src={logo} className="h-28 mb-2" />
-          </Link>
           ©{new Date().getFullYear()} Nifty Chess
         </div>
 
