@@ -13,7 +13,7 @@ export const mint = async ({ id }) => {
     const { walletProvider, walletAddress, network } = await unlockBrowser({
       debug: true,
     })
-    if (network.name !== 'xDAI') throw Error('Please switch to xDAI network')
+    if (network.chainId !== 100) throw Error('Please switch to xDAI network')
     const niftyChess = new Contract(
       CONTRACTS.niftyChess.xdai,
       CONTRACTS.niftyChess.abi,
