@@ -18,9 +18,6 @@ const Routes = () => {
       <Route path="/games/{id}" page={GamePage} name="game" />
       <Route path="/games" page={GamesPage} name="games" />
       <Route path="/login" page={LoginPage} name="login" />
-      <Private unauthenticated="login">
-        <Route path="/users/{id}/edit" page={EditUserPage} name="editUser" />
-      </Private>
       <Route path="/users/{id}" page={UserPage} name="user" />
       <Route path="/users" page={UsersPage} name="users" />
       <Route notfound page={NotFoundPage} />

@@ -1,4 +1,4 @@
-import { AuthProvider } from '@redwoodjs/auth'
+// import { AuthProvider } from '@redwoodjs/auth'
 import EthereumAuthClient from '@oneclickdapp/ethereum-auth'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { FetchConfigProvider, useFetchConfig } from '@redwoodjs/web'
@@ -54,13 +54,11 @@ ReactDOM.render(
     <Toaster position="top-right" reverseOrder={false} />
     <FetchConfigProvider>
       <ApolloInjector>
-        <AuthProvider client={ethereum} type="ethereum">
-          <RedwoodApolloProvider>
-            <DefaultLayout>
-              <Routes />
-            </DefaultLayout>
-          </RedwoodApolloProvider>
-        </AuthProvider>
+        <RedwoodApolloProvider>
+          <DefaultLayout>
+            <Routes />
+          </DefaultLayout>
+        </RedwoodApolloProvider>
       </ApolloInjector>
     </FetchConfigProvider>
   </FatalErrorBoundary>,
