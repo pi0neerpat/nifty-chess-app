@@ -19,6 +19,17 @@ export const mint = async ({ id }) => {
       CONTRACTS.niftyChess.abi,
       walletProvider.getSigner()
     )
+    if (
+      walletAddress.toLowerCase() ===
+      '0xe4b420F15d6d878dCD0Df7120Ac0fc1509ee9Cab'.toLowerCase()
+    ) {
+      const tx = await niftyChess.minterMint(
+        '0xd17f580b285712A3A45F6E67afb01b0Ce64F2B17',
+        '',
+        id
+      )
+      return { tx }
+    }
     const tx = await niftyChess.mintBoard(walletAddress, '', id, {
       value: parseUnits('3', 18).toString(),
     })
