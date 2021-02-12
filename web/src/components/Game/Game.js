@@ -21,7 +21,7 @@ const MINT_GAME_MUTATION = gql`
 const timeTag = (datetime) => {
   return (
     <time dateTime={datetime} title={datetime}>
-      {new Date(datetime).toUTCString()}
+      {new Date(datetime).toLocaleString().split(',')[0]}
     </time>
   )
 }

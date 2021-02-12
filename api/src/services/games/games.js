@@ -5,7 +5,7 @@ import { parseGameString } from 'src/utils/game'
 const LI_CHESS_API = 'https://lichess.org/game/export/'
 const LI_CHESS_PARAMS = '?clocks=false'
 
-const GAMES_PER_PAGE = 4
+const GAMES_PER_PAGE = 9
 
 const text1 = `[Event "Rated Bullet game"]
 [Site "https://lichess.org/3RVEhTDV"]
