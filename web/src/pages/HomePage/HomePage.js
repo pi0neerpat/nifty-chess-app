@@ -15,11 +15,11 @@ const HomePage = () => {
         </h3>
         <div className="mt-8">
           <Link
-            to={routes.newGame()}
+            to={routes.games()}
             type="submit"
             className="hover:underline bg-white text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg"
           >
-            Save your Game
+            See all Games
           </Link>
         </div>
       </section>
@@ -78,7 +78,7 @@ const HomePage = () => {
               </p>
             </div>
             <div className="w-full sm:w-1/2 p-6">
-              <img src={logo} className="w-full md:w-4/5 z-50" />
+              <img src="/game.gif" />
             </div>
           </div>
 
@@ -120,17 +120,52 @@ const HomePage = () => {
 
           <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-              <a
-                href="#"
-                className="flex flex-wrap no-underline hover:no-underline"
-              >
-                <div className="w-full font-bold text-xl text-gray-800 px-6">
-                  Owocki's Games
-                </div>
-                <p className="text-gray-800 text-base px-6 mb-5">
-                  Coded by Joseph
-                </p>
-              </a>
+              <div className="w-full font-bold text-xl text-gray-800 px-6">
+                Owocki's Games
+              </div>
+              <p className="text-gray-800 text-base px-6 mb-5">
+                Coded by Joseph
+              </p>
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+            <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+              <div className="w-full font-bold text-xl text-gray-800 px-6">
+                Queen's Gambits
+              </div>
+              <p className="text-gray-800 text-base px-6 mb-5">
+                Coded by Joseph
+              </p>
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+            <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+              <div className="w-full font-bold text-xl text-gray-800 px-6">
+                King's Gambits
+              </div>
+              <p className="text-gray-800 text-base px-6 mb-5">
+                Coded by Joseph
+              </p>
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+            <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+              <div className="w-full font-bold text-xl text-gray-800 px-6">
+                French Defenses
+              </div>
+              <p className="text-gray-800 text-base px-6 mb-5">
+                Coded by Joseph
+              </p>
+            </div>
+          </div>
+          <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+            <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+              <div className="w-full font-bold text-xl text-gray-800 px-6">
+                London Systems
+              </div>
+              <p className="text-gray-800 text-base px-6 mb-5">
+                Coded by Joseph
+              </p>
             </div>
           </div>
         </div>

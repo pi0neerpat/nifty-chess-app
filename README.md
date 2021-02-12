@@ -34,11 +34,9 @@ These contracts will be deployed soon.
 
 ### Code + Developer stuff
 
-Our smart contracts are adapted from the Nifty Ink contracts.
+Our smart contracts are adapted from the [Nifty Ink contracts](https://github.com/austintgriffith/scaffold-eth/blob/nifty-ink-dev/packages/buidler/contracts/NiftyMain.sol).
 
 Contract source code: http://remix.ethereum.org/?gist=b44c2c66212f701dc1ddab277cf7e8e7&call=fileManager//open//browser/niftyChess.sol
-
-One Click Dapp: https://oneclickdapp.com??
 
 ABI for interacting with the contract: https://gist.github.com/jschiarizzi/0f12f4f7bc02bbfe3373f30d470e38a6
 

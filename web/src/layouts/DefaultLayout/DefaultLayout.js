@@ -56,7 +56,6 @@ const DefaultLayout = ({ children }) => {
                 <img className="h-12" src={banner} />
               </Link>
             </div>
-            {loginButton}
           </div>
         </div>
       </header>
@@ -65,7 +64,7 @@ const DefaultLayout = ({ children }) => {
           {React.cloneElement(children, { useAuth })}
         </div>
       </div>
-      <Footer className="relative"/>
+      <Footer className="relative" />
     </div>
   )
 }

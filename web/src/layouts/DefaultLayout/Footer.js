@@ -21,7 +21,7 @@ const Footer = () => (
   <footer className="container py-12 md:flex md:items-center md:justify-between max-w-7xl mx-auto px-4 sm:px-6">
     <ul className="flex justify-center md:order-2">
       <FooterLink
-        href={'https://twitter.com/pi0neerpat'}
+        href={'https://twitter.com/cupOJoseph'}
         icon={FaTwitter}
         label="Twitter"
       />
