@@ -75,5 +75,4 @@ gxf6 15. Ne2 Nd7 16. Nbc3 Ne5 17. O-O h5 18. Rad1 h4 19. Nf4 Rag8 20. Nh3 Bb4
 21. Ne2 Bd7 22. Nef4 Bg4 23. Nd5+ Ke6 24. Nxb4 Bxh3 25. g3 Nf3+ 26. Kh1 hxg3 27.
 fxg3 Bxf1 28. Rxf1 Rxh2# 0-1`,
 ]
-
-export default games
+module.exports = { games }

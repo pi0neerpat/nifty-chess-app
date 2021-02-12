@@ -2,6 +2,8 @@
 const { PrismaClient } = require('@prisma/client')
 const dotenv = require('dotenv')
 
+const { parseGameString, parseDate, countMoves } = require('../src/utils/game')
+
 const { id: sha3 } = require('@ethersproject/hash')
 
 const fs = require('fs-extra')
@@ -13,10 +15,6 @@ const celebrityDirectoryPath = path.join(__dirname, './celebrityGames')
 
 dotenv.config()
 const db = new PrismaClient()
-
-const countMoves = (moves) => {
-  return Math.round(moves.trim().split(' ').length / 2)
-}
 
 const rawGamesOld = [
   {
@@ -30,15 +28,6 @@ const rawGamesOld = [
     winner: 'black',
   },
 ]
-
-const parseDate = (rawDate) => {
-  if (rawDate === 'year.month.day') return new Date(0, 0, 0)
-  let [year, month, day] = rawDate.split('.')
-  if (year.includes('?')) year = 0
-  month = month && month.includes('?') ? 0 : month - 1
-  if (day && day.includes('?')) day = 1
-  return new Date(year, month || 0, day || 0)
-}
 
 const seed = async (rawGames) => {
   await Promise.all(
@@ -104,9 +93,9 @@ async function main() {
     await files.forEach((fileName, index) => {
       if (index === files.length - 1) {
         console.log('Last file: ', index)
-      } else console.log('Games seeded: ', index)
-      const game = require(path.join(grandmasterDirectoryPath, fileName))
-      rawGames.push(game)
+      } else console.log('Seeding games for ', fileName)
+      const gameString = require(path.join(celebrityDirectoryPath, fileName))
+      rawGames.push(parseGameString(gameString))
     })
     console.log('Files loaded successfully! Time to seed...')
     await seed(rawGames)

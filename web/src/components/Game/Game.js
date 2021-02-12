@@ -9,6 +9,8 @@ import CONTRACTS from 'src/utils/contracts'
 
 import { QUERY } from 'src/components/GamesCell'
 
+const LOADING_GIF_SRC =
+  'https://gatsby-contentful-portfolio.netlify.app/static/b4a22f4943d8109a73c845e7521def69/c1c70/spain2.jpg'
 const MINT_GAME_MUTATION = gql`
   mutation MintGameMutation($id: String!) {
     mintGame(id: $id) {
@@ -35,7 +37,7 @@ const Game = ({ game }) => {
 
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
-  const [gifSrc, setGifSrc] = React.useState(null)
+  const [gifSrc, setGifSrc] = React.useState(LOADING_GIF_SRC)
 
   React.useEffect(() => {
     fetchGif()
@@ -85,101 +87,81 @@ const Game = ({ game }) => {
   }
 
   return (
-    <>
-      <div className="flex">
-        <div className="flex-auto justify-items-center">
-          <img src={gifSrc} />
-        </div>
-        <div className="flex-auto ">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Details</h2>
-            </header>
-            <table className="rw-table">
-              <tbody>
-                <tr>
-                  <th>Date</th>
-                  <td>{timeTag(game.playedAt)}</td>
-                </tr>
-                <tr>
-                  <th>Location</th>
-                  <td>{game.location}</td>
-                </tr>
-                <tr>
-                  <th>
-                    <svg height="20" width="20" className="ml-6">
-                      <circle
-                        cx="10"
-                        cy="10"
-                        r="8"
-                        stroke="black"
-                        strokeWidth="2"
-                        fill="black"
-                      />
-                    </svg>
-                  </th>
-                  <td>{game.black}</td>
-                </tr>
-                <tr>
-                  <th>
-                    <svg height="20" width="20" className="ml-6">
-                      <circle
-                        cx="10"
-                        cy="10"
-                        r="8"
-                        stroke="black"
-                        strokeWidth="2"
-                        fill="white"
-                      />
-                    </svg>
-                  </th>
-                  <td>{game.white}</td>
-                </tr>
-                <tr>
-                  <th>Winner</th>
-                  <td>{game.winner}</td>
-                </tr>
-                <tr>
-                  <th>Moves</th>
-                  <td>{game.moveCount}</td>
-                </tr>
-                {game.externalUrl && (
-                  <tr>
-                    <th>Visit</th>
-                    <td>
-                      <a href={game.externalUrl} target="_blank">
-                        Lichess.org
-                      </a>
-                    </td>
-                  </tr>
-                )}
-                {game.mintedAt && (
-                  <tr>
-                    <th>Minted</th>
-                    <td>{timeTag(game.mintedAt)}</td>
-                  </tr>
-                )}
-                {game.mintedAt && (
-                  <tr>
-                    <th>Minter</th>
-                    <td>{game.minterAddress}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+    <div className="bg-gray-0 py-12 lg:py-16">
+      <div className="container">
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-2/3 pb-8">
+            <img src={gifSrc} className="w-full" />
           </div>
-          <nav className="rw-button-group mt-4">
-            <a
-              href="#"
-              className="rw-button rw-button-blue"
-              onClick={() => onMintClick(game.id)}
-            >
-              Save as NFT
-            </a>
-          </nav>
+          <div className="w-full lg:w-1/3 lg:pl-8 xl:pl-12">
+            <h1 className=" text-3xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-4xl mb-1">
+              <div className="flex">
+                <svg height="20" width="20" className="mr-2 mt-3">
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="8"
+                    stroke="black"
+                    strokeWidth="2"
+                    fill="black"
+                  />
+                </svg>
+                {game.black}{' '}
+              </div>
+              <div className="flex">
+                <svg height="20" width="20" className="mr-2 mt-3">
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="8"
+                    stroke="black"
+                    strokeWidth="2"
+                    fill="white"
+                  />
+                </svg>
+                {game.white}
+              </div>
+            </h1>
+            <div className="mt-5">
+              <h2 className=" text-xl leading-tight font-semibold tracking-tight text-blue-600 sm:text-2xl">
+                {timeTag(game.playedAt)}
+              </h2>
+            </div>
+            <div className="my-4 text-base text-gray-700 whitespace-pre-line">
+              Winner - {game.winner}
+              <br />
+              Location - {game.location}
+              <br />
+              Moves - {game.moveCount}
+              <br />
+              {game.event && <>Event - {game.event}</>}
+              <br />
+              {game.externalUrl && (
+                <a href={game.externalUrl} target="_blank">
+                  Lichess.org
+                </a>
+              )}
+              <br />
+              {game.mintedAt && <>Minted: {timeTag(game.mintedAt)}</>}
+              <br />
+              {game.mintedAt && <>Minter:{game.minterAddress}</>}
+            </div>
+
+            {!game.mintedAt && (
+              <div className="mt-8">
+                <a
+                  href="#"
+                  className="rw-button rw-button-blue"
+                  onClick={() => onMintClick(game.id)}
+                >
+                  Mint NFT
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -44,29 +44,32 @@ const GameCard = ({ game }) => {
         </div>
         <div className="p-4 sm:p-5">
           <h1 className="sm:text-lg text-gray-900 font-semibold">
-            <svg height="20" width="20" className="">
-              <circle
-                cx="10"
-                cy="10"
-                r="8"
-                stroke="black"
-                strokeWidth="2"
-                fill="black"
-              />
-            </svg>
-            {game.black}
-
-            <svg height="20" width="20" className="">
-              <circle
-                cx="10"
-                cy="10"
-                r="8"
-                stroke="black"
-                strokeWidth="2"
-                fill="white"
-              />
-            </svg>
-            {game.white}
+            <div className="flex">
+              <svg height="20" width="20" className="mr-2 mt-1">
+                <circle
+                  cx="10"
+                  cy="10"
+                  r="8"
+                  stroke="black"
+                  strokeWidth="2"
+                  fill="black"
+                />
+              </svg>
+              {game.black}{' '}
+            </div>
+            <div className="flex">
+              <svg height="20" width="20" className="mr-2 mt-1">
+                <circle
+                  cx="10"
+                  cy="10"
+                  r="8"
+                  stroke="black"
+                  strokeWidth="2"
+                  fill="white"
+                />
+              </svg>
+              {game.white}
+            </div>
           </h1>
           <p className="text-sm sm:text-base text-gray-700">
             {timeTag(game.playedAt)}

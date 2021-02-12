@@ -1,4 +1,4 @@
-import { id as sha3 } from '@ethersproject/hash'
+const { id: sha3 } = require('@ethersproject/hash')
 
 const countMoves = (moves) => {
   return Math.round(moves.trim().split(' ').length / 2)
@@ -13,7 +13,7 @@ const parseDate = (rawDate) => {
   return new Date(year, month, day)
 }
 
-export const parseGameString = ({ gameString, externalUrl = '' }) => {
+const parseGameString = ({ gameString, externalUrl = '' }) => {
   let black
   let white
   let playedAtRaw
@@ -47,3 +47,5 @@ export const parseGameString = ({ gameString, externalUrl = '' }) => {
     externalUrl,
   }
 }
+
+module.exports = { parseGameString, parseDate, countMoves }

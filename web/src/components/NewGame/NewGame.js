@@ -1,4 +1,4 @@
-import { useMutation, useFlash } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
 import { navigate, routes } from '@redwoodjs/router'
 import GameForm from 'src/components/GameForm'
 
@@ -13,11 +13,10 @@ const CREATE_GAME_MUTATION = gql`
 `
 
 const NewGame = () => {
-  const { addMessage } = useFlash()
   const [createGame, { loading, error }] = useMutation(CREATE_GAME_MUTATION, {
     onCompleted: ({ createGame: { id } }) => {
       navigate(routes.game({ id }))
-      addMessage('Game created.', { classes: 'rw-flash-success' })
+      // show toast here
     },
   })
 
