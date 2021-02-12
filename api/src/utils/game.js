@@ -5,12 +5,18 @@ const countMoves = (moves) => {
 }
 
 const parseDate = (rawDate) => {
-  if (!rawDate) return ''
-  let [year, month, day] = rawDate.split('.')
-  if (year.includes('?')) year = 0
-  month = month.includes('?') ? 0 : month - 1
-  if (day.includes('?')) day = 1
-  return new Date(year, month, day)
+  try {
+    if (!rawDate) return ''
+    if (typeof rawDate === 'object')
+      rawDate = new Date(rawDate).toISOString().split('T')[0].replace('-', '.')
+    let [year, month, day] = rawDate.split('.')
+    if (year.includes('?')) year = 0
+    month = month.includes('?') ? 0 : month - 1
+    if (day.includes('?')) day = 1
+    return new Date(year, month, day)
+  } catch (e) {
+    console.log({ rawDate })
+  }
 }
 
 const parseGameString = ({ gameString, externalUrl = '' }) => {

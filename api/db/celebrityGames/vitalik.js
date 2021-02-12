@@ -56,4 +56,4 @@ Kxd6 15. Qf7 Rd8 16. c4 Rd7 17. c5+ Kd5 18. Qf6 b6 19. Rac1 Ba6 20. Nb1 Bxf1 21.
 Kxf1 Nxd4 22. Qxd4+ Kc6 23. cxb6+ Kb7 24. Qxd7 axb6 25. Rxc7+ Ka6 26. Qa4# 1-0
 `,
 ]
-module.exports = { games }
+module.exports = games
