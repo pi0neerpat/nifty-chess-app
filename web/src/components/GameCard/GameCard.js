@@ -39,7 +39,7 @@ const GameCard = ({ game }) => {
     <div className="bg-white h-full shadow-sm rounded-md overflow-hidden group">
       <Link to={routes.game({ id: game.id })}>
         <div className="group-hover:opacity-75 transition duration-150 ease-in-out">
-          <img src={gifSrc} />
+          <img className="w-full" src={gifSrc} />
         </div>
         <div className="text-left p-4 sm:p-5">
           <h1 className="sm:text-lg text-gray-900 font-semibold">

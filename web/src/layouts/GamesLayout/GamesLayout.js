@@ -12,7 +12,7 @@ const GamesLayout = (props) => {
           </Link>
         </h1>
         <Link to={routes.newGame()} className="rw-button rw-button-green">
-          <div className="rw-button-icon">+</div> New Game
+          <div className="rw-button-icon">+</div> Add Your Game
         </Link>
       </header>
       <main className="rw-main">{props.children}</main>

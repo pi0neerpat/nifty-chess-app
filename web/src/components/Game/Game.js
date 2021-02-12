@@ -130,8 +130,12 @@ const Game = ({ game }) => {
               <br />
               Location - {game.location}
               <br />
-              Moves - {game.moveCount}
-              <br />
+              {game.moveCount && (
+                <>
+                  Moves - {game.moveCount}
+                  <br />
+                </>
+              )}
               {game.event && <>Event - {game.event}</>}
               <br />
               {game.externalUrl && (
