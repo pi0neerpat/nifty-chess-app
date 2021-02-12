@@ -10,6 +10,8 @@
 
 > A playful NFT game for collecting chess games. Made with <3 @ ETH Denver 2021
 
+<img src="game10.gif"/>
+
 <!-- ### 🏠 [Homepage](TODO) -->
 
 ## Tech stack
@@ -34,11 +36,9 @@ These contracts will be deployed soon.
 
 ### Code + Developer stuff
 
-Our smart contracts are adapted from the [Nifty Ink contracts](https://github.com/austintgriffith/scaffold-eth/blob/nifty-ink-dev/packages/buidler/contracts/NiftyMain.sol).
+Our smart contracts are adapted from the [Nifty Ink contracts](https://github.com/austintgriffith/scaffold-eth/blob/nifty-ink-dev/packages/buidler/contracts/NiftyMain.sol). See the contract source code here: http://remix.ethereum.org/?gist=b44c2c66212f701dc1ddab277cf7e8e7&call=fileManager//open//browser/niftyChess.sol. And use this ABI to interact with the contract: https://gist.github.com/jschiarizzi/0f12f4f7bc02bbfe3373f30d470e38a6
 
-Contract source code: http://remix.ethereum.org/?gist=b44c2c66212f701dc1ddab277cf7e8e7&call=fileManager//open//browser/niftyChess.sol
-
-ABI for interacting with the contract: https://gist.github.com/jschiarizzi/0f12f4f7bc02bbfe3373f30d470e38a6
+The UI was built with RedwoodJS. See `notes.md` for a complete walkthrough of how it was made.
 
 ## Install
 
