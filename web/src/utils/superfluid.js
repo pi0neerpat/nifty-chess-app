@@ -16,7 +16,6 @@ export const donateFlow = async () => {
       throw Error('Please switch to Goerli network')
     const sf = new SuperfluidSDK.Framework({
       ethers: walletProvider,
-      tokens: ['fDAI'],
     })
     await sf.initialize()
     const donor = sf.user({
@@ -28,7 +27,6 @@ export const donateFlow = async () => {
       flowRate: 385802469135802,
     })
     toast.success('Transaction complete. Thanks for donating!')
-    return { tx }
   } catch (err) {
     console.log(err)
     return {
