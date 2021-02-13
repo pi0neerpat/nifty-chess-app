@@ -51,7 +51,7 @@ const ApolloInjector = ({ children }) => {
 
 ReactDOM.render(
   <FatalErrorBoundary page={FatalErrorPage}>
-    <Toaster position="top-right" reverseOrder={false} />
+    <Toaster position="top-right" reverseOrder={true} />
     <FetchConfigProvider>
       <ApolloInjector>
         <RedwoodApolloProvider>
