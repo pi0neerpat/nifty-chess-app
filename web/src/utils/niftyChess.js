@@ -13,12 +13,13 @@ export const mint = async ({ id }) => {
     const { walletProvider, walletAddress, network } = await unlockBrowser({
       debug: true,
     })
-    if (network.chainId !== 100) throw Error('Please switch to xDAI network')
+    if (network?.chainId !== 100) throw Error('Please switch to xDAI network')
     const niftyChess = new Contract(
       CONTRACTS.niftyChess.xdai,
       CONTRACTS.niftyChess.abi,
       walletProvider.getSigner()
     )
+
     if (
       walletAddress.toLowerCase() ===
       '0xe4b420F15d6d878dCD0Df7120Ac0fc1509ee9Cab'.toLowerCase()
@@ -30,12 +31,23 @@ export const mint = async ({ id }) => {
       )
       return { tx }
     }
+
+    const price = await walletProvider.getStorageAt(
+      CONTRACTS.niftyChess.xdai,
+      16
+    )
+    const xdaiBalance = await walletProvider.getBalance(walletAddress)
+    if (xdaiBalance.lt(price))
+      throw Error(
+        `Insufficient funds. ${formatUnits(price, 18)} xDAI is needed`
+      )
     const tx = await niftyChess.mintBoard(walletAddress, '', id, {
-      value: parseUnits('3', 18).toString(),
+      value: price,
     })
     return { tx }
   } catch (err) {
     console.log(err)
+    console.log(err?.data?.message)
     return {
       ...getErrorResponse(err, 'mint'),
     }

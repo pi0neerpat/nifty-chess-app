@@ -54,6 +54,16 @@ copy `.env.template` to `.env` and add the required variables
 yarn rw dev
 ```
 
+### Ngrok it
+
+```bash
+# In VM
+yarn rw dev --fwd="--host=0.0.0.0"
+
+# on host machine
+./ngrok http 8910
+```
+
 ## New to Redwood?
 
 - [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.

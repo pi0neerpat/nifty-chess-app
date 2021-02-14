@@ -17,7 +17,7 @@ const NewGame = () => {
   const [createGame, { loading, error }] = useMutation(CREATE_GAME_MUTATION, {
     onCompleted: ({ createGame: { id } }) => {
       navigate(routes.game({ id }))
-      toast.success('Game created!')
+      toast.success('NFT generated')
     },
   })
 

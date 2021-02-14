@@ -55,6 +55,8 @@ export const createGame = async ({ input: { externalUrl } }) => {
   let gameString
   if (externalUrl.includes('lichess.org')) {
     // https://lichess.org/api#section/Introduction
+    if (externalUrl.includes('study'))
+      throw Error(`"Study" games cannot be used, only real games.`)
     try {
       const gameId = externalUrl.split('lichess.org/')[1].split('/')[0]
       const res = await fetch(`${LI_CHESS_API}${gameId}${LI_CHESS_PARAMS}`)

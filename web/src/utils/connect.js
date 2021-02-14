@@ -30,6 +30,7 @@ export const unlockBrowser = async ({ debug }) => {
         'Web3Browser wallet loaded: ',
         JSON.stringify({ walletAddress, network })
       )
+
     return {
       hasWallet: true,
       isUnlocked: true,

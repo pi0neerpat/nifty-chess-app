@@ -9,12 +9,13 @@ const parseDate = (rawDate) => {
     if (!rawDate) return ''
     if (typeof rawDate === 'object')
       rawDate = new Date(rawDate).toISOString().split('T')[0].replace('-', '.')
-    let [year, month, day] = rawDate.split('.')
+    let [year, month, day] = rawDate.split(/[\.-]/)
     if (year.includes('?')) year = 0
     month = month.includes('?') ? 0 : month - 1
     if (day.includes('?')) day = 1
     return new Date(year, month, day)
   } catch (e) {
+    console.log('Error in parseDate() with argument: ')
     console.log({ rawDate })
   }
 }

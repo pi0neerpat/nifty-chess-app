@@ -30,15 +30,13 @@ const rawGamesOld = [
   },
 ]
 
-const seed = async (rawGames) => {
+const seed = async (jsonGames) => {
   await Promise.all(
-    rawGames.map(async (game, index) => {
+    jsonGames.map(async (game, index) => {
       const id = sha3(game.moves)
 
       // CHANGE THIS
       if (index > 50) return
-      // console.log({ id, ...game })
-      console.log(id)
 
       const exists = await db.game.findUnique({ where: { id } })
       if (!exists) {
@@ -51,7 +49,8 @@ const seed = async (rawGames) => {
               moveCount: countMoves(game.moves),
             },
           })
-          if (index === rawGames.length - 1) {
+          console.log(id)
+          if (index === jsonGames.length - 1) {
             console.log('Last file: ', index)
           } else if (index % 100 === 0) console.log('Games seeded: ', index)
         } catch (e) {
@@ -66,40 +65,40 @@ const seed = async (rawGames) => {
 }
 
 async function main() {
-  let rawGames = []
-  fs.readdir(recentDirectoryPath, async (err, files) => {
-    if (err) return console.log(err)
-    console.log('Loading grand master game files...')
-    await files.forEach((fileName, index) => {
-      if (index === files.length - 1) {
-        console.log('Last file: ', index + 1)
-      } else if (index % 1000 === 0) console.log('Games loaded: ', index)
-      const gameString = require(path.join(grandmasterDirectoryPath, fileName))
-      rawGames.push(gameString)
-    })
-    console.log(rawGames.length)
-    console.log('Example game:')
-    console.log('Files loaded successfully! Time to seed...')
-    await seed(rawGames)
-    console.log('Seed grandmaster games is complete!')
-  })
-  // fs.readdir(celebrityDirectoryPath, async (err, files) => {
+  let jsonGames = []
+  // fs.readdir(recentDirectoryPath, async (err, files) => {
   //   if (err) return console.log(err)
-  //   console.log('Loading celebrity game files...')
+  //   console.log('Loading grand master game files...')
   //   await files.forEach((fileName, index) => {
-  //     console.log('Loading games for ', fileName.split('.js')[0])
-  //     const gameStringList = require(path.join(
-  //       celebrityDirectoryPath,
-  //       fileName
-  //     ))
-  //     gameStringList.map((gameString, index) => {
-  //       rawGames.push(gameString)
-  //     })
+  //     if (index === files.length - 1) {
+  //       console.log('Last file: ', index + 1)
+  //     } else if (index % 1000 === 0) console.log('Games loaded: ', index)
+  //     const jsonGame = require(path.join(grandmasterDirectoryPath, fileName))
+  //     jsonGames.push(jsonGame)
   //   })
-  //   console.log('Files loaded. Time to seed...')
-  //   // await seed(rawGames)
-  //   console.log('Finished')
+  //   console.log(jsonGames.length)
+  //   console.log('Example game:')
+  //   console.log('Files loaded successfully! Time to seed...')
+  //   await seed(jsonGames)
+  //   console.log('Seed grandmaster games is complete!')
   // })
+  fs.readdir(celebrityDirectoryPath, async (err, files) => {
+    if (err) return console.log(err)
+    console.log('Loading celebrity game files...')
+    await files.forEach((fileName, index) => {
+      console.log('Loading games for ', fileName.split('.js')[0])
+      const gameStringList = require(path.join(
+        celebrityDirectoryPath,
+        fileName
+      ))
+      gameStringList.map((gameString, index) => {
+        jsonGames.push(parseGameString({ gameString }))
+      })
+    })
+    console.log('Files loaded. Time to seed...')
+    await seed(jsonGames)
+    console.log('Finished')
+  })
 }
 
 main()
