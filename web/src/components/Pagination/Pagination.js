@@ -14,16 +14,15 @@ const Pagination = ({ count, page, perPage }) => {
     )
 
   const totalPages = Math.ceil(count / perPage)
-
-  if (page > 10) addButton({ text: '-10', page: page - 10 })
-  addButton({ text: '<', page: page - 1 })
+  if (page > 10) addButton({ text: '<<', page: page - 10 })
+  if (page > 1) addButton({ text: '<', page: page - 1 })
   items.push(
     <div key={page} className="inline-block mx-1 py-1 px-3 ">
       {page}
     </div>
   )
-  addButton({ text: '>', page: page + 1 })
-  if (page < count - 10) addButton({ text: '+10', page: page + 10 })
+  if (page < totalPages) addButton({ text: '>', page: page + 1 })
+  if (page < totalPages - 10) addButton({ text: '>>', page: page + 10 })
 
   return <div className="text-lg text-gray-900 font-semibold">{items}</div>
 }

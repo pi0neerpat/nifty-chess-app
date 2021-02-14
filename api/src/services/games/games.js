@@ -19,16 +19,22 @@ export const game = async ({ id }) => {
   const game = await db.game.findOne({
     where: { id },
   })
-  const { ownerAddress, tokenId } = await getNftDetails({
-    providerOrSigner: walletlessProvider,
-    id,
-  })
+  let ownerAddress
+  let tokenId
+  try {
+    ;({ ownerAddress, tokenId } = await getNftDetails({
+      providerOrSigner: walletlessProvider,
+      id,
+    }))
+  } catch (e) {
+    console.log(e)
+  }
   return { ...game, ownerAddress, tokenId }
 }
 
-export const gamePage = ({ page = 1 }) => {
+export const gamePage = async ({ page = 1 }) => {
   const offset = (page - 1) * GAMES_PER_PAGE
-
+  const count = await db.game.count()
   return {
     games: db.game.findMany({
       take: GAMES_PER_PAGE,
