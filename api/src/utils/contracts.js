@@ -1,4 +1,4 @@
-import niftyChessABI from './niftyChess.json'
+import niftyChessABI from './niftyChessAbi'
 
 const CONTRACTS = {
   niftyChess: {

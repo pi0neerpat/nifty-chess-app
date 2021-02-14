@@ -1,4 +1,4 @@
-[
+const abi =[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -829,3 +829,4 @@
 		"type": "function"
 	}
 ]
+module.exports = abi
