@@ -23,7 +23,7 @@ export const game = async ({ id }) => {
     providerOrSigner: walletlessProvider,
     id,
   })
-  return { ownerAddress, tokenId: Number(tokenId), ...game }
+  return { ...game, ownerAddress, tokenId }
 }
 
 export const gamePage = ({ page = 1 }) => {

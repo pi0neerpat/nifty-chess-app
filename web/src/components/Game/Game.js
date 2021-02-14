@@ -89,7 +89,6 @@ const Game = ({ game }) => {
       },
     })
   }
-  console.log(game)
   return (
     <div className="bg-gray-0 py-12 lg:py-16">
       <div className="container">
@@ -135,26 +134,51 @@ const Game = ({ game }) => {
               Winner - {game.winner}
               <br />
               Location - {game.location}
-              <br />
               {game.moveCount && (
                 <>
-                  Moves - {game.moveCount}
                   <br />
+                  Moves - {game.moveCount}
                 </>
               )}
-              {game.event && <>Event - {game.event}</>}
-              <br />
-              {game.externalUrl && (
-                <a href={game.externalUrl} target="_blank">
-                  Lichess.org
-                </a>
+              {game.event && (
+                <>
+                  <br />
+                  Event - {game.event}
+                </>
               )}
-              {game.mintedAt && <>Minted: {timeTag(game.mintedAt)}</>}
-              {game.tokenId && <>Token ID: {game.tokenId}</>}
+              {game.externalUrl && (
+                <>
+                  <br />{' '}
+                  <a href={game.externalUrl} target="_blank">
+                    Lichess.org
+                  </a>
+                </>
+              )}
+              <br />
+              {game.mintedAt && (
+                <>
+                  {' '}
+                  <br />
+                  Minted: {timeTag(game.mintedAt)}
+                </>
+              )}
+              {game.tokenId && (
+                <>
+                  {' '}
+                  <br />
+                  Token ID: {game.tokenId}
+                </>
+              )}
               {game.ownerAddress && (
                 <>
                   <br />
-                  Owner: {truncate(game.ownerAddress, 7)}
+                  Owner:{' '}
+                  <a
+                    href={`${BLOCKSCOUT_URL}${game.ownerAddress}`}
+                    target="_blank"
+                  >
+                    {truncate(game.ownerAddress, 7)}
+                  </a>
                 </>
               )}
             </div>

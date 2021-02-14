@@ -15,5 +15,5 @@ export const getNftDetails = async ({ id, providerOrSigner }) => {
   const niftyChess = getContract({ providerOrSigner })
   const ownerAddress = await niftyChess.getOwnerByHash(id)
   const tokenId = await niftyChess.tokenHashLookup(id)
-  return { ownerAddress, tokenId }
+  return { ownerAddress, tokenId: Number(tokenId.toString()) }
 }
