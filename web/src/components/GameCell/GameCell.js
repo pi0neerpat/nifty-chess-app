@@ -9,6 +9,7 @@ export const QUERY = gql`
       playedAt
       mintedAt
       minterAddress
+      ownerAddress
       tokenId
       externalUrl
       location

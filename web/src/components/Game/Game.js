@@ -10,6 +10,8 @@ import { mint } from 'src/utils/niftyChess'
 import CONTRACTS from 'src/utils/contracts'
 
 import { QUERY } from 'src/components/GamesCell'
+import { truncate } from 'src/utils/general'
+import { BLOCKSCOUT_URL } from 'src/utils/constants'
 
 const LOADING_GIF_SRC = '/skeleton.png'
 
@@ -87,7 +89,7 @@ const Game = ({ game }) => {
       },
     })
   }
-
+  console.log(game)
   return (
     <div className="bg-gray-0 py-12 lg:py-16">
       <div className="container">
@@ -147,13 +149,17 @@ const Game = ({ game }) => {
                   Lichess.org
                 </a>
               )}
-              <br />
               {game.mintedAt && <>Minted: {timeTag(game.mintedAt)}</>}
-              <br />
-              {game.mintedAt && <>Minter:{game.minterAddress}</>}
+              {game.tokenId && <>Token ID: {game.tokenId}</>}
+              {game.ownerAddress && (
+                <>
+                  <br />
+                  Owner: {truncate(game.ownerAddress, 7)}
+                </>
+              )}
             </div>
 
-            {!game.mintedAt && (
+            {!game.ownerAddress && (
               <div className="mt-8">
                 <button
                   disabled={loading}

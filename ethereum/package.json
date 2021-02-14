@@ -1,0 +1,43 @@
+{
+  "name": "ethereum",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Ethereum utility for nifty chess",
+  "author": "Patrick Gallagher <blockchainbuddha@gmail.com>",
+  "main": "dist/index.js",
+  "module": "src/index.js",
+  "prepublish": "yarn build",
+  "browserslist": {
+    "development": [
+      "last 1 version"
+    ],
+    "production": [
+      "defaults",
+      "not IE 11",
+      "not IE_Mob 11"
+    ]
+  },
+  "scripts": {},
+  "dependencies": {
+    "@superfluid-finance/js-sdk": "^0.3.5",
+    "@ethersproject/contracts": "^5.0.1",
+    "@ethersproject/hash": "^5.0.1",
+    "@ethersproject/providers": "^5.0.4",
+    "@ethersproject/units": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "babel-loader": "^8.0.6",
+    "bundle-stats": "^2.0.1",
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pi0neerpat/nifty-chess-app.git"
+  },
+  "homepage": "https://github.com/pi0neerpat/nifty-chess-app"
+}

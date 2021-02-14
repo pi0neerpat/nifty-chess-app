@@ -6,6 +6,7 @@ export const schema = gql`
     playedAt: DateTime!
     mintedAt: String
     minter: User
+    ownerAddress: String
     minterAddress: String
     tokenId: Int
     externalUrl: String

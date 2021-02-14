@@ -1,8 +1,3 @@
-export const truncate = (text, length = 50) => {
-  if (typeof text !== 'string') return ''
-  return text.substring(0, length) + '...'
-}
-
 export const getErrorResponse = (error, functionName) => {
   const errorText = typeof error === 'string' ? error : error.message
   const res = {
