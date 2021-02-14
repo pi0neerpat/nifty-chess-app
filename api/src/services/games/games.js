@@ -56,7 +56,7 @@ export const createGame = async ({ input: { externalUrl } }) => {
   if (externalUrl.includes('lichess.org')) {
     // https://lichess.org/api#section/Introduction
     try {
-      const gameId = externalUrl.split('lichess.org/')[1].slice(0, 8)
+      const gameId = externalUrl.split('lichess.org/')[1].split('/')[0]
       const res = await fetch(`${LI_CHESS_API}${gameId}${LI_CHESS_PARAMS}`)
       if (res.status === 404) throw new Error(`Game ${gameId} not found`)
       gameString = await res.text()
@@ -71,9 +71,11 @@ export const createGame = async ({ input: { externalUrl } }) => {
   } else {
     throw Error('URL is not valid')
   }
-
+  const game = parseGameString({ gameString, externalUrl })
+  const existingGame = await db.game.findOne({ where: { id: game.id } })
+  if (existingGame) return existingGame
   return db.game.create({
-    data: parseGameString({ gameString, externalUrl }),
+    data: game,
   })
 }
 
