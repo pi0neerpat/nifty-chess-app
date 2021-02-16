@@ -80,12 +80,13 @@ const Game = ({ game }) => {
       setLoading(false)
       return
     }
-    toast.promise(tx.wait(0), {
+    toast.promise(tx.wait(), {
       loading: 'Minting...',
       success: <b>Minted!</b>,
       error: (err) => {
         setLoading(false)
-        return <b>Something went wrong.</b>
+        console.log(err)
+        return <b>Something went wrong. {err?.message}</b>
       },
     })
   }
