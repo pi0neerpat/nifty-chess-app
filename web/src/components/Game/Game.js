@@ -158,14 +158,12 @@ const Game = ({ game }) => {
               <br />
               {game.mintedAt && (
                 <>
-                  {' '}
                   <br />
                   Minted: {timeTag(game.mintedAt)}
                 </>
               )}
-              {game.tokenId && (
+              {game.tokenId > 0 && (
                 <>
-                  {' '}
                   <br />
                   Token ID: {game.tokenId}
                 </>
@@ -183,18 +181,6 @@ const Game = ({ game }) => {
                 </>
               )}
             </div>
-
-            {!game.ownerAddress && (
-              <div className="mt-8">
-                <button
-                  disabled={loading}
-                  className="w-full rw-button rw-button-blue"
-                  onClick={() => onMintClick(game.id)}
-                >
-                  Mint NFT (xDAI)
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -13,7 +13,12 @@ const getContract = ({ providerOrSigner }) => {
 
 export const getNftDetails = async ({ id, providerOrSigner }) => {
   const niftyChess = getContract({ providerOrSigner })
-  const ownerAddress = await niftyChess.getOwnerByHash(id)
+  let ownerAddress
+  try {
+    ownerAddress = await niftyChess.getOwnerByHash(id)
+  } catch (e) {
+    // do nothing
+  }
   const tokenId = await niftyChess.tokenHashLookup(id)
   return { ownerAddress, tokenId: Number(tokenId.toString()) }
 }
