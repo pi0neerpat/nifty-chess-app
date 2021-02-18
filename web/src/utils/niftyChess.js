@@ -41,9 +41,18 @@ export const mint = async ({ id }) => {
       throw Error(
         `Insufficient funds. ${formatUnits(price, 18)} xDAI is needed`
       )
-    const tx = await niftyChess.mintBoard(walletAddress, '', id, {
-      value: price,
-    })
+    const overrides = {
+      gasLimit: 250000,
+    }
+    const tx = await niftyChess.mintBoard(
+      walletAddress,
+      '',
+      id,
+      {
+        value: price,
+      },
+      overrides
+    )
     return { tx }
   } catch (err) {
     console.log(err)
