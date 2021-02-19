@@ -180,6 +180,17 @@ const Game = ({ game }) => {
                   </a>
                 </>
               )}
+              {!game.ownerAddress && (
+                <div className="mt-8">
+                  <button
+                    disabled={loading}
+                    className="w-full rw-button rw-button-blue"
+                    onClick={() => onMintClick(game.id)}
+                  >
+                    Mint NFT (xDAI)
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
