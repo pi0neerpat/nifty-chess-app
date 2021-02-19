@@ -18,7 +18,7 @@
 
 - `@redwoodjs` for the React and Prisma database tooling
 - `@oneclickdapp/ethereum-auth` for wallet authentication [docs](https://github.com/oneclickdapp/ethereum-auth/blob/master/README.md)
-- `node-pgn2gif` library adapted from `pgn2gif`. Every pgn is broken into JSON, and there is one pgn for each game, rather than for each tournament. We also hash the pgn to generate the NFT seed (which is used to generate the color) https://github.com/jschiarizzi/node-pgn2gif
+- `node-pgn2gif` library adapted from `pgn2gif`. Every pgn is broken into JSON, and there is one pgn for each game, rather than for each tournament. We also hash the pgn to generate the NFT seed (which is used to generate the color) https://github.com/jschiarizzi/node_pgn2gif
 
 ## Contracts
 
