@@ -11,4 +11,6 @@ python3 -m transcrypt -b -m hello.py
 # use "-n" to skip minification
 sudo apt install openjdk-11-jre-headless
 
+# Node demo
+python3 -m transcrypt -b -p .none nodejs_demo
 ```
